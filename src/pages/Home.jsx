@@ -254,20 +254,22 @@ const Home = () => {
             Leading Hub for Digital Business Services, Operational Excellence, and Transformational Solutions
           </p>
 
-            <Link to="/contact-us" className="btn-spark" style={{
-              background: '#1a237e',
-              padding: '1.75rem 2.8rem',
-              border: 'none',
-              borderRadius: '50px',
-              color: 'white',
-              textDecoration: 'none',
-              fontWeight: '700',
-              fontSize: '1.05rem',
-              position: 'relative'
-            }}>
-              Contact Us
-            </Link>
+          <Link to="/contact-us" className="btn-spark" style={{
+            background: '#1a237e',
+            padding: '1.75rem 2.8rem',
+            border: 'none',
+            borderRadius: '50px',
+            color: 'white',
+            textDecoration: 'none',
+            fontWeight: '700',
+            fontSize: '1.05rem',
+            position: 'relative'
+          }}>
+            Contact Us
+          </Link>
         </div>
+
+
         {/* Subtle Dark Gradient Overlay */}
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(4,20,52,0.7) 0%, rgba(4,20,52,0.3) 100%)', zIndex: 1 }}></div>
 
@@ -640,16 +642,16 @@ const Home = () => {
       </section>
 
       {/* 5. Dual Brand Story Showcase (Show Both) */}
-      <section style={{ 
-        display: 'flex', 
-        flexDirection: 'column', 
+      <section style={{
+        display: 'flex',
+        flexDirection: 'column',
         background: '#041434',
-        padding: '0' 
+        padding: '0'
       }}>
-        
+
         {/* Row 1: Talent Hero */}
-        <div style={{ 
-          width: '100%', 
+        <div style={{
+          width: '100%',
           position: 'relative',
           height: '700px',
           background: `url(${img1})`,
@@ -663,7 +665,7 @@ const Home = () => {
         }}>
           {/* Cinematic Overlay - Talent State */}
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(4, 20, 52, 0.85) 0%, rgba(4, 20, 52, 0.2) 100%)' }}></div>
-          
+
           <div style={{ position: 'relative', zIndex: 10, maxWidth: '600px', textAlign: 'left' }}>
             <h2 style={{ fontSize: '3.5rem', color: 'white', marginBottom: '1.25rem', fontWeight: '800', lineHeight: '1.1' }}>
               At Stefto, <br />talent sets us apart
@@ -679,8 +681,8 @@ const Home = () => {
         </div>
 
         {/* Row 2: Social Commitment */}
-        <div style={{ 
-          width: '100%', 
+        <div style={{
+          width: '100%',
           position: 'relative',
           height: '700px',
           background: `url(${img2})`,
@@ -694,7 +696,7 @@ const Home = () => {
         }}>
           {/* Cinematic Overlay - Commitment State */}
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.1) 100%)' }}></div>
-          
+
           <div style={{ position: 'relative', zIndex: 10, maxWidth: '600px', textAlign: 'left' }}>
             <h2 style={{ fontSize: '3rem', color: 'white', marginBottom: '1.25rem', fontWeight: '800', lineHeight: '1.2' }}>
               Our commitment: <br />Improvement of society
@@ -732,8 +734,8 @@ const Home = () => {
       </section>
 
       {/* 7. Our Media Coverage (Transparent VALUE Design) */}
-      <section style={{ 
-        padding: '5.5rem 0', 
+      <section style={{
+        padding: '5.5rem 0',
         background: `linear-gradient(rgba(4, 20, 52, 0.6), rgba(4, 20, 52, 0.7)), url(${mediaBg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
@@ -796,8 +798,8 @@ const Home = () => {
       </section>
 
       {/* 9. Testimonials From Clients (Value Background - Cinematic Transparency) */}
-      <section style={{ 
-        padding: '7rem 0', 
+      <section style={{
+        padding: '7rem 0',
         background: `linear-gradient(rgba(4, 20, 52, 0.6), rgba(4, 20, 52, 0.6)), url(${mediaBg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
@@ -818,8 +820,8 @@ const Home = () => {
             </div>
           </div>
 
-          <div style={{ 
-            maxWidth: '1000px', margin: '0 auto', background: 'white', borderRadius: '16px', 
+          <div style={{
+            maxWidth: '1000px', margin: '0 auto', background: 'white', borderRadius: '16px',
             padding: '2.5rem 4rem', boxShadow: '0 35px 80px rgba(0,0,0,0.35)', position: 'relative', overflow: 'hidden', textAlign: 'center'
           }}>
             <div style={{ position: 'absolute', top: '-35px', right: '-35px', width: '110px', height: '110px', background: '#2563eb', borderRadius: '50%', zIndex: 1 }}></div>
@@ -827,7 +829,7 @@ const Home = () => {
               <h3 style={{ fontSize: '1.75rem', color: '#0f172a', fontWeight: '800', marginBottom: '0.5rem' }}>MR. VINEET KAKKAR</h3>
               <p style={{ fontSize: '0.85rem', color: '#94a3b8', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1.25rem' }}>(ZONAL HEAD) - SBIC</p>
               <div style={{ display: 'flex', justifyContent: 'center', gap: '5px', marginBottom: '1.5rem' }}>
-                {[...Array(5)].map((_, i) => ( <Star key={i} size={22} fill="#fbca1e" color="#fbca1e" /> ))}
+                {[...Array(5)].map((_, i) => (<Star key={i} size={22} fill="#fbca1e" color="#fbca1e" />))}
               </div>
               <p style={{ fontSize: '1.15rem', color: '#64748b', lineHeight: '1.8', fontWeight: '400', maxWidth: '850px', margin: '0 auto' }}>
                 It has been a great experience and continuous journey with the Stefto Team. The organisation has strong leadership in delivery and managing the businesses very effectively. What sets them apart is their vested interest in understanding the nuances of the business and the culture of the organization.
@@ -852,7 +854,7 @@ const Home = () => {
         </div>
 
         <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem', position: 'relative', zIndex: 10 }}>
-          
+
           {/* Section Header with Navigation */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '5rem' }}>
             <div style={{ textAlign: 'left' }}>
@@ -865,13 +867,13 @@ const Home = () => {
                 <div style={{ width: '50px', height: '4px', background: '#0033cc', borderRadius: '2px' }}></div>
               </div>
             </div>
-            <Link to="/blogs" style={{ 
-              padding: '1rem 2.5rem', 
-              background: '#155e75', 
-              color: 'white', 
-              borderRadius: '6px', 
-              textDecoration: 'none', 
-              fontWeight: '700', 
+            <Link to="/blogs" style={{
+              padding: '1rem 2.5rem',
+              background: '#155e75',
+              color: 'white',
+              borderRadius: '6px',
+              textDecoration: 'none',
+              fontWeight: '700',
               fontSize: '1rem',
               boxShadow: '0 4px 0 rgba(0,0,0,0.1)',
               transition: 'all 0.2s'
@@ -886,24 +888,24 @@ const Home = () => {
             gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
             gap: '2.5rem'
           }}>
-            <BlogCard 
-              date="28" 
-              month="Feb" 
-              tags={["Debt Collection", "Customer Support", "New Update"]} 
+            <BlogCard
+              date="28"
+              month="Feb"
+              tags={["Debt Collection", "Customer Support", "New Update"]}
               title="Management Solutions in Current Times"
               excerpt="The Significance of Recovery Management Solutions in Current Times"
             />
-            <BlogCard 
-              date="23" 
-              month="Jan" 
-              tags={["Debt Collection"]} 
+            <BlogCard
+              date="23"
+              month="Jan"
+              tags={["Debt Collection"]}
               title="Making Debt Collection More Human: A 2025 Case Study"
               excerpt="How AI is Making Debt Collection More Human: A 2025 Case Study"
             />
-            <BlogCard 
-              date="07" 
-              month="Jan" 
-              tags={["Debt Collection"]} 
+            <BlogCard
+              date="07"
+              month="Jan"
+              tags={["Debt Collection"]}
               title="According to the RBI report, Indian household debt is rising"
               excerpt="According to the RBI report, Indian household debt is rising, but it is relatively low in comparison with other emerging markets"
             />
@@ -912,8 +914,8 @@ const Home = () => {
       </section>
 
       {/* 11. Global Interaction CTA (Cinematic Background Image) */}
-      <section style={{ 
-        padding: '6rem 0', 
+      <section style={{
+        padding: '6rem 0',
         background: `linear-gradient(rgba(4, 20, 52, 0.8), rgba(4, 20, 52, 0.8)), url(${globalBg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
@@ -921,7 +923,7 @@ const Home = () => {
       }}>
         <div className="container" style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 2rem' }}>
           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '5rem' }}>
-            
+
             {/* Left Content: Corporate Authority (White Text) */}
             <div style={{ flex: '1 1 500px' }}>
               <h2 style={{ fontSize: '2.8rem', color: 'white', fontWeight: '800', lineHeight: '1.2', marginBottom: '2.5rem' }}>
@@ -934,9 +936,9 @@ const Home = () => {
 
             {/* Right Content: 'Subscribe with Email' Card */}
             <div style={{ flex: '1 1 400px' }}>
-              <div style={{ 
-                background: 'white', 
-                borderRadius: '16px', 
+              <div style={{
+                background: 'white',
+                borderRadius: '16px',
                 padding: '3rem',
                 minHeight: '280px',
                 display: 'flex',
@@ -949,34 +951,34 @@ const Home = () => {
                 <div style={{ fontSize: '1.2rem', color: '#0f172a', fontWeight: '700', marginBottom: '1.5rem', textAlign: 'center' }}>
                   Subscribe to our newsletter
                 </div>
-                <div style={{ 
-                  display: 'flex', 
-                  background: '#f1f5f9', 
-                  borderRadius: '12px', 
+                <div style={{
+                  display: 'flex',
+                  background: '#f1f5f9',
+                  borderRadius: '12px',
                   padding: '5px',
                   alignItems: 'center',
                   boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.02)'
                 }}>
-                  <input 
-                    type="email" 
-                    placeholder="Enter your email address" 
-                    style={{ 
-                      flex: 1, 
-                      border: 'none', 
-                      background: 'transparent', 
-                      padding: '1rem 1.5rem', 
-                      fontSize: '1rem', 
+                  <input
+                    type="email"
+                    placeholder="Enter your email address"
+                    style={{
+                      flex: 1,
+                      border: 'none',
+                      background: 'transparent',
+                      padding: '1rem 1.5rem',
+                      fontSize: '1rem',
                       outline: 'none',
                       color: '#1e293b'
-                    }} 
+                    }}
                   />
-                  <button style={{ 
-                    background: '#043b4d', 
-                    color: 'white', 
-                    border: 'none', 
-                    padding: '1rem 2rem', 
-                    borderRadius: '8px', 
-                    fontWeight: '800', 
+                  <button style={{
+                    background: '#043b4d',
+                    color: 'white',
+                    border: 'none',
+                    padding: '1rem 2rem',
+                    borderRadius: '8px',
+                    fontWeight: '800',
                     fontSize: '1.1rem',
                     cursor: 'pointer',
                     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -1020,7 +1022,7 @@ const BlogCard = ({ date, month, tags, title, excerpt }) => (
     display: 'flex',
     flexDirection: 'column'
   }} onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-10px)'; e.currentTarget.style.boxShadow = '0 25px 60px rgba(0,0,0,0.12)'; }}>
-    
+
     {/* Floating Date Badge */}
     <div style={{
       position: 'absolute',
@@ -1041,12 +1043,12 @@ const BlogCard = ({ date, month, tags, title, excerpt }) => (
     {/* Tags */}
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '1.5rem', marginLeft: '1rem' }}>
       {tags.map((tag, idx) => (
-        <span key={idx} style={{ 
-          background: '#3b82f6', 
-          color: 'white', 
-          fontSize: '0.65rem', 
-          fontWeight: '700', 
-          padding: '4px 10px', 
+        <span key={idx} style={{
+          background: '#3b82f6',
+          color: 'white',
+          fontSize: '0.65rem',
+          fontWeight: '700',
+          padding: '4px 10px',
           borderRadius: '4px',
           textTransform: 'uppercase'
         }}>{tag}</span>
@@ -1056,19 +1058,19 @@ const BlogCard = ({ date, month, tags, title, excerpt }) => (
     <h3 style={{ fontSize: '1.4rem', color: '#0f172a', fontWeight: '800', marginBottom: '1.5rem', lineHeight: '1.4', paddingLeft: '1rem' }}>
       {title}
     </h3>
-    
+
     <p style={{ fontSize: '0.95rem', color: '#64748b', lineHeight: '1.6', marginBottom: '2.5rem', paddingLeft: '1rem' }}>
       {excerpt}
     </p>
 
     <div style={{ marginTop: 'auto', paddingLeft: '1rem' }}>
-      <button style={{ 
-        background: '#2563eb', 
-        color: 'white', 
-        border: 'none', 
-        padding: '0.9rem 1.8rem', 
-        borderRadius: '6px', 
-        fontWeight: '700', 
+      <button style={{
+        background: '#2563eb',
+        color: 'white',
+        border: 'none',
+        padding: '0.9rem 1.8rem',
+        borderRadius: '6px',
+        fontWeight: '700',
         fontSize: '0.95rem',
         display: 'flex',
         alignItems: 'center',
@@ -1098,8 +1100,8 @@ const MediaLogoCard = () => (
     background: 'white', height: '100px', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center',
     boxShadow: '0 15px 40px rgba(0,0,0,0.2)', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)', cursor: 'pointer', position: 'relative', gap: '12px'
   }}
-  onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-8px)'; e.currentTarget.style.boxShadow = '0 20px 55px rgba(59, 130, 246, 0.4)'; }}
-  onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 15px 40px rgba(0,0,0,0.2)'; }}>
+    onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-8px)'; e.currentTarget.style.boxShadow = '0 20px 55px rgba(59, 130, 246, 0.4)'; }}
+    onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 15px 40px rgba(0,0,0,0.2)'; }}>
     <div style={{ width: '24px', height: '24px', position: 'relative', opacity: 0.5 }}>
       <div style={{ border: '2px solid #94a3b8', width: '100%', height: '100%', borderRadius: '2px' }}></div>
       <div style={{ position: 'absolute', top: '50%', left: '-10%', width: '120%', height: '2px', background: '#94a3b8', transform: 'rotate(45deg)' }}></div>
@@ -1113,8 +1115,8 @@ const NewsCard = ({ img, title, desc, tag }) => (
     background: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 15px 45px rgba(0,0,0,0.08)',
     transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)', display: 'flex', flexDirection: 'column', height: '100%', cursor: 'pointer', border: '1px solid rgba(0,0,0,0.02)'
   }}
-  onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-10px)'; e.currentTarget.style.boxShadow = '0 25px 60px rgba(10, 48, 140, 0.12)'; }}
-  onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 15px 45px rgba(0,0,0,0.08)'; }}>
+    onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-10px)'; e.currentTarget.style.boxShadow = '0 25px 60px rgba(10, 48, 140, 0.12)'; }}
+    onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 15px 45px rgba(0,0,0,0.08)'; }}>
     <div style={{ width: '100%', height: '160px', background: `url(${img})`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
     <div style={{ padding: '1.25rem 2rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
       <div style={{ fontSize: '0.8rem', color: '#64748b', textTransform: 'uppercase', marginBottom: '0.75rem', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '6px' }}>
