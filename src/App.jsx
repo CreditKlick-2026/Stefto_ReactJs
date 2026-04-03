@@ -125,85 +125,68 @@ const NavBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header style={{ width: '100%', position: 'sticky', top: 0, zIndex: 1000, boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
-      {/* Top Navy Bar - Hidden on small mobile */}
-      <div style={{ background: '#2b3366', color: 'white', padding: '0.6rem 2rem', fontSize: '0.85rem' }} className="hide-on-mobile">
-        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 0 }}>
-          <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><Phone size={14} /> +91 8800 101 102</span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }} className="hide-on-tablet"><Mail size={14} /> info@stefto.com</span>
+    <header className="w-full sticky top-0 z-[1000] shadow-md">
+      {/* Top Navy Bar - Visible on mobile now */}
+      <div className="bg-[#2b3366] text-white py-1.5 sm:py-2 px-2 sm:px-6 lg:px-8 text-sm">
+        <div className="max-w-[1380px] mx-auto flex justify-center sm:justify-between items-center">
+          <div className="flex gap-3 sm:gap-6 lg:gap-8 items-center justify-center w-full sm:w-auto">
+            <span className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-sm"><Phone size={12} className="sm:w-3.5 sm:h-3.5" /> +91 8800 101 102</span>
+            <span className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-sm"><Mail size={12} className="sm:w-3.5 sm:h-3.5" /> info@stefto.com</span>
           </div>
-          <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'center' }}>
-            <a href="https://www.facebook.com/steftocom/" target="_blank" rel="noreferrer" style={{ color: 'white', opacity: 0.8 }}><FaFacebookF size={14} /></a>
-            <a href="https://x.com/steftocom" target="_blank" rel="noreferrer" style={{ color: 'white', opacity: 0.8 }}><FaTwitter size={14} /></a>
-            <a href="https://www.linkedin.com/company/stefto/" target="_blank" rel="noreferrer" style={{ color: 'white', opacity: 0.8 }}><FaLinkedinIn size={14} /></a>
+          <div className="hidden sm:flex gap-3 sm:gap-4 items-center">
+            <a href="https://www.facebook.com/steftocom/" target="_blank" rel="noreferrer" className="text-white opacity-80 hover:opacity-100 transition-opacity"><FaFacebookF size={14} /></a>
+            <a href="https://x.com/steftocom" target="_blank" rel="noreferrer" className="text-white opacity-80 hover:opacity-100 transition-opacity"><FaTwitter size={14} /></a>
+            <a href="https://www.linkedin.com/company/stefto/" target="_blank" rel="noreferrer" className="text-white opacity-80 hover:opacity-100 transition-opacity"><FaLinkedinIn size={14} /></a>
           </div>
         </div>
       </div>
 
-      {/* Main Bottom Bar */}
-      <div style={{ background: '#f8fafc', padding: '0.75rem 2rem', position: 'relative' }}>
-        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 0 }}>
+      {/* Main Nav Bar */}
+      <div className="bg-slate-50 py-2.5 sm:py-3 px-3 sm:px-4 lg:px-8 relative">
+        <div className="max-w-[1380px] mx-auto flex justify-between items-center">
           
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            {/* Hamburger for Mobile */}
-            <button 
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              style={{ 
-                background: 'none', border: 'none', cursor: 'pointer', color: '#1a237e', 
-                display: 'none' 
-              }} 
-              className="show-on-tablet"
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+          <div className="flex items-center gap-2 sm:gap-3">
             <SteftoLogo />
           </div>
 
-          {/* Desktop Nav - Hidden on tablet/mobile */}
-          <nav style={{ display: 'flex', gap: '1rem', alignItems: 'center' }} className="hide-on-tablet">
+          {/* Desktop Nav - Hidden on mobile/tablet */}
+          <nav className="hidden lg:flex gap-3 xl:gap-4 items-center">
             {Object.keys(navMenus).map((label) => (
               <div
                 key={label}
-                style={{ position: 'relative' }}
+                className="relative"
                 onMouseEnter={() => setActiveMenu(label)}
                 onMouseLeave={() => setActiveMenu(null)}
               >
-                <span style={{
-                  color: activeMenu === label ? '#0033cc' : '#1e293b',
-                  textDecoration: 'none', fontSize: '0.9rem', fontWeight: '600',
-                  display: 'flex', alignItems: 'center', gap: '0.25rem', padding: '0.4rem 0.6rem',
-                  borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s ease',
-                  background: activeMenu === label ? '#f1f5f9' : 'transparent'
-                }}>
+                <span className={`flex items-center gap-1 px-2 py-1.5 rounded-md cursor-pointer transition-all text-sm font-semibold ${activeMenu === label ? 'text-stefto-blue bg-slate-100' : 'text-slate-800'}`}>
                   {label} <ChevronDown size={12} />
                 </span>
 
                 {activeMenu === label && (
-                  <div style={{ position: 'absolute', top: '100%', left: '50%', transform: 'translateX(-50%)', paddingTop: '0.75rem', zIndex: 999 }}>
-                    <div style={{ background: 'white', boxShadow: '0 20px 60px rgba(0,0,0,0.15)', borderRadius: '12px', display: 'flex', minWidth: navMenus[label].layout === 'columns' ? 'auto' : '600px', overflow: 'hidden', border: '1px solid #e2e8f0' }}>
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 z-[999]">
+                    <div className="bg-white shadow-2xl rounded-xl flex overflow-hidden border border-slate-200" style={{ minWidth: navMenus[label].layout === 'columns' ? 'auto' : '600px' }}>
                       {navMenus[label].layout === 'columns' ? (
-                        <div style={{ display: 'flex', width: '600px', height: '300px' }}>
+                        <div className="flex w-[600px] h-[300px]">
                           {navMenus[label].columns.map((col, idx) => (
-                            <Link key={idx} to={col.to} style={{ flex: 1, position: 'relative', backgroundImage: `url(${col.image})`, backgroundSize: 'cover', backgroundPosition: 'center', display: 'flex', alignItems: 'flex-end', textDecoration: 'none', padding: '1rem' }}>
-                              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(transparent, rgba(0,0,0,0.85))' }}></div>
-                              <span style={{ position: 'relative', zIndex: 1, color: 'white', fontSize: '1.1rem', fontWeight: '800' }}>{col.label}</span>
+                            <Link key={idx} to={col.to} className="flex-1 relative bg-cover bg-center flex items-end no-underline p-4" style={{ backgroundImage: `url(${col.image})` }}>
+                              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/85"></div>
+                              <span className="relative z-[1] text-white text-lg font-extrabold">{col.label}</span>
                             </Link>
                           ))}
                         </div>
                       ) : (
                         <>
-                          <div style={{ flex: '1', padding: '1.5rem' }}>
-                            <p style={{ color: '#0033cc', fontWeight: '700', fontSize: '0.95rem', marginBottom: '1rem' }}>{navMenus[label].heading}</p>
+                          <div className="flex-1 p-5">
+                            <p className="text-stefto-blue font-bold text-sm mb-3" style={{ color: '#0033cc' }}>{navMenus[label].heading}</p>
                             {navMenus[label].links.map((link, i) => (
-                              <Link key={i} to={link.to} onClick={() => setActiveMenu(null)} style={{ color: '#1e293b', textDecoration: 'none', padding: '0.5rem 0', fontSize: '0.85rem', fontWeight: '500', display: 'block', borderBottom: '1px solid #f1f5f9' }}>{link.label}</Link>
+                              <Link key={i} to={link.to} onClick={() => setActiveMenu(null)} className="block text-slate-800 no-underline py-2 text-sm font-medium border-b border-slate-50">{link.label}</Link>
                             ))}
                           </div>
-                          <div style={{ flex: '1', position: 'relative', background: navMenus[label].panel.type === 'dark' ? '#041434' : 'transparent', backgroundImage: navMenus[label].panel.image ? `url(${navMenus[label].panel.image})` : 'none', backgroundSize: 'cover', padding: '1.5rem', color: 'white' }}>
-                            <div style={{ position: 'absolute', inset: 0, background: 'rgba(4, 20, 52, 0.45)' }}></div>
-                            <div style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-                              <h4 style={{ fontSize: '1.2rem', fontWeight: '800' }}>{navMenus[label].panel.title}</h4>
-                              <p style={{ fontSize: '0.8rem', opacity: 0.9 }}>{navMenus[label].panel.desc}</p>
+                          <div className="flex-1 relative bg-cover p-5 text-white" style={{ background: navMenus[label].panel.type === 'dark' ? '#041434' : 'transparent', backgroundImage: navMenus[label].panel.image ? `url(${navMenus[label].panel.image})` : 'none', backgroundSize: 'cover' }}>
+                            <div className="absolute inset-0 bg-[rgba(4,20,52,0.45)]"></div>
+                            <div className="relative z-[1] text-center">
+                              <h4 className="text-lg font-extrabold">{navMenus[label].panel.title}</h4>
+                              <p className="text-sm opacity-90" style={{ color: 'white' }}>{navMenus[label].panel.desc}</p>
                             </div>
                           </div>
                         </>
@@ -215,39 +198,47 @@ const NavBar = () => {
             ))}
           </nav>
 
-          {/* Right Actions */}
-          <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+            {/* Right Actions */}
+          <div className="flex gap-2 sm:gap-3 items-center">
             {isSearchVisible ? (
-              <div style={{ display: 'flex', alignItems: 'center', background: '#f8fafc', borderRadius: '50px', padding: '0.2rem 0.5rem 0.2rem 1rem', border: '1.5px solid #1a237e', boxShadow: '0 4px 15px rgba(26, 35, 126, 0.1)' }} className="search-wrap-mobile">
-                <input type="text" placeholder="Search..." autoFocus style={{ border: 'none', background: 'transparent', outline: 'none', fontSize: '0.8rem', width: window.innerWidth < 480 ? '100px' : '150px' }} />
-                <button onClick={() => setIsSearchVisible(false)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}><X size={14} /></button>
+              <div className="flex items-center bg-slate-50 rounded-full py-0.5 pl-3 sm:pl-4 pr-1 sm:pr-2 border-[1.5px] border-stefto-indigo shadow-sm">
+                <input type="text" placeholder="Search..." autoFocus className="border-none bg-transparent outline-none text-xs sm:text-sm w-[80px] sm:w-[120px] lg:w-[150px]" />
+                <button onClick={() => setIsSearchVisible(false)} className="bg-transparent border-none cursor-pointer p-1"><X size={14} /></button>
               </div>
             ) : (
-              <button onClick={() => setIsSearchVisible(true)} style={{ width: '38px', height: '38px', borderRadius: '50%', border: '1.5px solid #000000', background: '#ffffff', color: '#1a237e', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Search size={16} /></button>
+              <button onClick={() => setIsSearchVisible(true)} className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border-[1.5px] border-black bg-white text-stefto-indigo cursor-pointer flex items-center justify-center"><Search size={14} /></button>
             )}
             
             {!isSearchVisible && (
-              <Link to="/contact-us" className="btn-spark hide-on-mobile" style={{ background: '#1a237e', color: 'white', padding: '0.5rem 1.4rem', borderRadius: '50px', fontWeight: '700', textDecoration: 'none', fontSize: '0.85rem' }}>
+              <Link to="/contact-us" className="btn-spark hidden md:inline-flex items-center justify-center relative overflow-hidden bg-stefto-indigo text-white py-1.5 sm:py-2 px-4 sm:px-5 rounded-full font-bold no-underline text-xs sm:text-sm">
                 Contact us
               </Link>
             )}
+
+            {/* Hamburger - visible on mobile/tablet, hidden on desktop */}
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="lg:hidden flex items-center justify-center bg-transparent border-none cursor-pointer text-stefto-indigo p-1 focus:outline-none"
+            >
+              {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
           </div>
         </div>
 
-        {/* Mobile Menu Dropdown Overlay */}
+        {/* Mobile Menu Dropdown */}
         {isMobileMenuOpen && (
-          <div style={{ position: 'absolute', top: '100%', left: 0, width: '100%', background: 'white', zIndex: 1001, boxShadow: '0 10px 30px rgba(0,0,0,0.1)', borderTop: '1px solid #e2e8f0', padding: '1.5rem', maxHeight: '80vh', overflowY: 'auto' }}>
+          <div className="absolute top-full left-0 w-full bg-white z-[1001] shadow-lg border-t border-slate-200 p-4 sm:p-6 max-h-[80vh] overflow-y-auto lg:hidden">
             {Object.keys(navMenus).map((label) => (
-              <div key={label} style={{ marginBottom: '1.5rem' }}>
-                <h4 style={{ color: '#1a237e', fontSize: '1rem', fontWeight: '800', marginBottom: '0.75rem', borderBottom: '2px solid #f1f5f9', paddingBottom: '0.35rem' }}>{label}</h4>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
+              <div key={label} className="mb-4 sm:mb-5">
+                <h4 className="text-stefto-indigo text-sm sm:text-base font-extrabold mb-2 sm:mb-3 border-b-2 border-slate-100 pb-1.5">{label}</h4>
+                <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
                   {(navMenus[label].links || (navMenus[label].columns || [])).map((link, k) => (
-                    <Link key={k} to={link.to} onClick={() => setIsMobileMenuOpen(false)} style={{ color: '#475569', textDecoration: 'none', fontSize: '0.85rem', padding: '0.25rem 0' }}>{link.label}</Link>
+                    <Link key={k} to={link.to} onClick={() => setIsMobileMenuOpen(false)} className="text-slate-500 no-underline text-xs sm:text-sm py-1">{link.label}</Link>
                   ))}
                 </div>
               </div>
             ))}
-            <Link to="/contact-us" onClick={() => setIsMobileMenuOpen(false)} style={{ display: 'block', background: '#1a237e', color: 'white', textAlign: 'center', padding: '0.75rem', borderRadius: '8px', textDecoration: 'none', fontWeight: '700', marginTop: '1rem' }}>Contact us</Link>
+            <Link to="/contact-us" onClick={() => setIsMobileMenuOpen(false)} className="block bg-stefto-indigo text-white text-center py-2.5 sm:py-3 rounded-lg no-underline font-bold mt-3 text-sm">Contact us</Link>
           </div>
         )}
       </div>
@@ -256,91 +247,70 @@ const NavBar = () => {
 };
 
 const Footer = () => (
-  <footer style={{
-    background: '#041434',
-    color: 'white',
-    padding: '3.5rem 2rem 2.5rem 2rem',
-    fontSize: '0.875rem',
-    position: 'relative',
-    borderTop: '5px solid #3b82f6'
-  }}>
-    <div className="container" style={{ maxWidth: '1280px', margin: '0 auto' }}>
+  <footer className="bg-stefto-navy text-white pt-10 sm:pt-12 lg:pt-14 pb-20 sm:pb-24 px-4 sm:px-6 lg:px-8 text-sm relative border-t-[5px] border-stefto-sky">
+    <div className="max-w-[1280px] mx-auto">
 
       {/* Link Matrix */}
-      <div className="footer-matrix">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8">
 
         {/* Brand Hub */}
         <div>
-          <div style={{ marginBottom: '1.25rem' }}>
-            <img
-              src={steftoLogo}
-              alt="Stefto"
-              style={{
-                height: '45px',
-                objectFit: 'contain'
-              }}
-            />
+          <div className="mb-4 sm:mb-5">
+            <img src={steftoLogo} alt="Stefto" className="h-10 sm:h-11 object-contain" />
           </div>
-          <p className="footer-heading-spark" style={{ lineHeight: '1.5', fontSize: '0.85rem' }}>
+          <p className="footer-heading-spark leading-relaxed text-xs sm:text-sm">
             Stefto is the trade name of Incredible Management Services (India) Private Limited (CIN: U74140DL2007ULT166363).
           </p>
         </div>
 
         {/* Links Column 1 */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-          <h4 className="footer-heading-spark" style={{ fontSize: '1rem', fontWeight: '700', marginBottom: '0.5rem' }}>Company</h4>
-          <Link to="/about-us" className="footer-link-spark">About Us</Link>
-          <Link to="/careers" className="footer-link-spark">Careers</Link>
-          <Link to="/security" className="footer-link-spark">Security</Link>
-          <Link to="/digital-lead-partner" className="footer-link-spark">Partnership</Link>
-          <Link to="/contact-us" className="footer-link-spark">Contact us</Link>
+        <div className="flex flex-col gap-2">
+          <h4 className="footer-heading-spark text-sm sm:text-base font-bold mb-1 sm:mb-2">Company</h4>
+          <Link to="/about-us" className="footer-link-spark text-xs sm:text-sm">About Us</Link>
+          <Link to="/careers" className="footer-link-spark text-xs sm:text-sm">Careers</Link>
+          <Link to="/security" className="footer-link-spark text-xs sm:text-sm">Security</Link>
+          <Link to="/digital-lead-partner" className="footer-link-spark text-xs sm:text-sm">Partnership</Link>
+          <Link to="/contact-us" className="footer-link-spark text-xs sm:text-sm">Contact us</Link>
         </div>
 
         {/* Links Column 2 */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-          <h4 className="footer-heading-spark" style={{ fontSize: '1rem', fontWeight: '700', marginBottom: '0.5rem' }}>Solutions</h4>
-          <Link to="/inbound" className="footer-link-spark">Inbound</Link>
-          <Link to="/digital-debt-management" className="footer-link-spark">Digital Debt Collections</Link>
-          <Link to="/customer-support" className="footer-link-spark">Digital Communications</Link>
-          <Link to="/retention-and-persistency" className="footer-link-spark">Retention and Persistency</Link>
-          <Link to="/sales-support" className="footer-link-spark">Sales Support</Link>
+        <div className="flex flex-col gap-2">
+          <h4 className="footer-heading-spark text-sm sm:text-base font-bold mb-1 sm:mb-2">Solutions</h4>
+          <Link to="/inbound" className="footer-link-spark text-xs sm:text-sm">Inbound</Link>
+          <Link to="/digital-debt-management" className="footer-link-spark text-xs sm:text-sm">Digital Debt Collections</Link>
+          <Link to="/customer-support" className="footer-link-spark text-xs sm:text-sm">Digital Communications</Link>
+          <Link to="/retention-and-persistency" className="footer-link-spark text-xs sm:text-sm">Retention and Persistency</Link>
+          <Link to="/sales-support" className="footer-link-spark text-xs sm:text-sm">Sales Support</Link>
         </div>
 
         {/* Links Column 3 */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-          <h4 className="footer-heading-spark" style={{ fontSize: '1rem', fontWeight: '700', marginBottom: '0.5rem' }}>Insights</h4>
-          <Link to="/news" className="footer-link-spark">Blog</Link>
-          <Link to="/press-release" className="footer-link-spark">Press Release</Link>
-          <Link to="/case-studies" className="footer-link-spark">Case Studies</Link>
-          <Link to="/customer-stories" className="footer-link-spark">Customer Stories</Link>
-          <Link to="/leadership" className="footer-link-spark">Awards</Link>
+        <div className="flex flex-col gap-2">
+          <h4 className="footer-heading-spark text-sm sm:text-base font-bold mb-1 sm:mb-2">Insights</h4>
+          <Link to="/news" className="footer-link-spark text-xs sm:text-sm">Blog</Link>
+          <Link to="/press-release" className="footer-link-spark text-xs sm:text-sm">Press Release</Link>
+          <Link to="/case-studies" className="footer-link-spark text-xs sm:text-sm">Case Studies</Link>
+          <Link to="/customer-stories" className="footer-link-spark text-xs sm:text-sm">Customer Stories</Link>
+          <Link to="/leadership" className="footer-link-spark text-xs sm:text-sm">Awards</Link>
         </div>
 
         {/* Links Column 4 */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-          <h4 className="footer-heading-spark" style={{ fontSize: '1rem', fontWeight: '700', marginBottom: '0.5rem' }}>Legal</h4>
-          <Link to="/refunds-cancellations" className="footer-link-spark">Refunds & cancellations</Link>
-          <Link to="/legal-statement" className="footer-link-spark">Legal Notice</Link>
-          <Link to="/terms-of-use" className="footer-link-spark">Terms of Use</Link>
-          <Link to="/privacy-policy" className="footer-link-spark">Acceptable Use Policy</Link>
-          <Link to="/cookie-policy" className="footer-link-spark">Cookie Policy</Link>
-          <Link to="/privacy-policy" className="footer-link-spark">Privacy Policy</Link>
+        <div className="flex flex-col gap-2">
+          <h4 className="footer-heading-spark text-sm sm:text-base font-bold mb-1 sm:mb-2">Legal</h4>
+          <Link to="/refunds-cancellations" className="footer-link-spark text-xs sm:text-sm">Refunds & cancellations</Link>
+          <Link to="/legal-statement" className="footer-link-spark text-xs sm:text-sm">Legal Notice</Link>
+          <Link to="/terms-of-use" className="footer-link-spark text-xs sm:text-sm">Terms of Use</Link>
+          <Link to="/privacy-policy" className="footer-link-spark text-xs sm:text-sm">Acceptable Use Policy</Link>
+          <Link to="/cookie-policy" className="footer-link-spark text-xs sm:text-sm">Cookie Policy</Link>
+          <Link to="/privacy-policy" className="footer-link-spark text-xs sm:text-sm">Privacy Policy</Link>
         </div>
 
       </div>
 
       {/* Bottom Section: Locations + Demo */}
-      <div style={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-between',
-        alignItems: 'flex-start',
-        gap: '3rem',
-        paddingTop: '2.5rem'
-      }}>
+      <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-12 pt-8 sm:pt-10 mt-6 sm:mt-8 border-t border-white/10">
 
         {/* Locations List */}
-        <div style={{ flex: '1 1 600px', display: 'flex', flexDirection: 'column', gap: '0.5rem', opacity: 0.8, fontSize: '0.8rem' }}>
+        <div className="flex-1 flex flex-col gap-1.5 sm:gap-2 opacity-80 text-[0.7rem] sm:text-xs lg:text-sm">
           <div><strong>Head Office:</strong> Plot No. 112, Udyog Vihar, Phase-1, Gurugram, Haryana-122016</div>
           <div><strong>New Delhi Office:</strong> IInd Floor, DLF, Moti Nagar, New Delhi-110015</div>
           <div><strong>West Delhi Office:</strong> WZ-1, Upper Ground Floor, Main Nazafgarh Road, Uttam Nagar West, Delhi-110059</div>
@@ -349,26 +319,15 @@ const Footer = () => (
         </div>
 
         {/* Demo & Social */}
-        <div style={{ flex: '1 1 300px', textAlign: window.innerWidth < 768 ? 'left' : 'right' }}>
-          <h4 style={{ fontSize: '1.1rem', fontWeight: '800', marginBottom: '0.35rem' }}>For Booking a Demo</h4>
-          <p style={{ fontSize: '0.9rem', marginBottom: '1.25rem', opacity: 0.85 }}>
+        <div className="text-left lg:text-right">
+          <h4 className="text-base sm:text-lg font-extrabold mb-1">For Booking a Demo</h4>
+          <p className="text-xs sm:text-sm mb-4 sm:mb-5 opacity-85" style={{ color: 'white' }}>
             Mobile: +91 8800-101-102. Email: info@stefto.com
           </p>
-          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: window.innerWidth < 768 ? 'flex-start' : 'flex-end' }}>
+          <div className="flex gap-2 sm:gap-3 justify-start lg:justify-end">
             {[FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaYoutube].map((Icon, idx) => (
-              <a key={idx} href="#" style={{
-                width: '36px',
-                height: '36px',
-                borderRadius: '50%',
-                background: 'white',
-                color: '#041434',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                textDecoration: 'none',
-                transition: 'all 0.3s ease'
-              }} onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 8px 15px rgba(0,0,0,0.3)'; }} onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}>
-                <Icon size={16} />
+              <a key={idx} href="#" className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white text-stefto-navy flex items-center justify-center no-underline transition-all hover:-translate-y-1 hover:shadow-lg">
+                <Icon size={14} />
               </a>
             ))}
           </div>
@@ -378,26 +337,10 @@ const Footer = () => (
 
     </div>
 
-    {/* Definitve Copyright Strip */}
-    <div style={{
-      background: '#ffffff',
-      borderTop: '1px solid rgba(4, 20, 52, 0.1)',
-      padding: '1.25rem 2rem',
-      textAlign: 'left',
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      width: '100%',
-      display: 'flex',
-      justifyContent: 'center'
-    }}>
-      <p style={{
-        color: '#64748b',
-        fontSize: '0.8rem',
-        margin: 0,
-        fontFamily: "'Plus Jakarta Sans', sans-serif"
-      }}>
-        <strong style={{ color: '#475569' }}>Copyright &copy; 2007 &ndash; 2026</strong> Stefto Management Services (Incredible Management Services (India) Pvt Ltd)
+    {/* Copyright Strip */}
+    <div className="absolute bottom-0 left-0 w-full bg-white border-t border-stefto-navy/10 py-3 sm:py-4 px-4 sm:px-8 flex justify-center">
+      <p className="text-slate-400 text-[0.65rem] sm:text-xs lg:text-sm m-0 text-center font-sans" style={{ color: '#64748b' }}>
+        <strong className="text-slate-500">Copyright &copy; 2007 &ndash; 2026</strong> Stefto Management Services (Incredible Management Services (India) Pvt Ltd)
       </p>
     </div>
   </footer>
