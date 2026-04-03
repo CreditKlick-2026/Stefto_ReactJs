@@ -139,7 +139,7 @@ const Home = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-[rgba(4,20,52,0.7)] to-[rgba(4,20,52,0.3)] z-[1]"></div>
 
         {/* Floating Services Bar */}
-        <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-[90%] sm:w-[85%] max-w-[1200px] bg-white py-4 sm:py-5 px-4 sm:px-6 lg:px-14 rounded-xl z-10 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-4 lg:gap-10 shadow-[0_1px_0_rgba(0,0,0,0.05),0_4px_6px_rgba(0,0,0,0.04),0_12px_25px_rgba(0,0,0,0.1),0_30px_60px_rgba(0,0,0,0.15)] border border-black/[0.03] max-sm:static max-sm:translate-x-0 max-sm:mt-6 max-sm:mx-auto max-sm:w-[calc(100%-2rem)]">
+        <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-[90%] sm:w-[85%] max-w-[1200px] bg-white py-4 sm:py-5 px-4 sm:px-6 lg:px-14 rounded-xl z-10 hidden sm:flex sm:flex-col md:flex-row md:justify-between md:items-center gap-3 sm:gap-4 lg:gap-10 shadow-[0_1px_0_rgba(0,0,0,0.05),0_4px_6px_rgba(0,0,0,0.04),0_12px_25px_rgba(0,0,0,0.1),0_30px_60px_rgba(0,0,0,0.15)] border border-black/[0.03]">
           {['Inbound and Outbound', 'Digital Sales Fulfilment', 'Debt Collection', 'Market Research'].map((service, idx) => (
             <div key={idx} className="flex items-center gap-3 text-slate-800 text-xs sm:text-sm lg:text-base font-bold tracking-tight transition-transform hover:-translate-y-0.5">
               <div className="w-2.5 h-2.5 border-2 border-stefto-sky rounded-sm flex-shrink-0"></div>
