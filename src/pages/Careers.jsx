@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Square } from 'lucide-react';
 import perksImage from '../assets/stefto_career_working.png';
 import ctaImage from '../assets/stefto_business_growth.png';
+import jobAlertsImage from '../assets/stefto_job_alerts.png';
 
 const Careers = () => {
   useEffect(() => {
@@ -229,12 +230,9 @@ const Careers = () => {
         <div className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-24">
             
-            {/* Left Image Area (matching the broken image reference in screenshot) */}
-            <div className="w-full md:w-1/2 h-[300px] sm:h-[400px] bg-slate-50 flex items-center justify-center text-slate-400 border border-slate-100 rounded-lg">
-              <div className="flex items-center gap-2">
-                <Square size={20} className="opacity-50" />
-                <span className="text-sm font-medium">05-services3.jpg</span>
-              </div>
+            {/* Left Image Area */}
+            <div className="w-full md:w-1/2 h-[300px] sm:h-[400px] border border-slate-100 rounded-lg overflow-hidden shadow-lg relative">
+              <img src={jobAlertsImage} alt="Job Alerts" className="w-full h-full object-cover object-center" />
             </div>
 
             {/* Right Content Area */}

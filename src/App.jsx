@@ -144,7 +144,7 @@ const NavBar = () => {
       {/* Main Nav Bar */}
       <div className="bg-slate-50 py-2.5 sm:py-3 px-3 sm:px-4 lg:px-8 relative">
         <div className="max-w-[1380px] mx-auto flex justify-between items-center">
-          
+
           <div className="flex items-center gap-2 sm:gap-3">
             <SteftoLogo />
           </div>
@@ -198,7 +198,7 @@ const NavBar = () => {
             ))}
           </nav>
 
-            {/* Right Actions */}
+          {/* Right Actions */}
           <div className="flex gap-2 sm:gap-3 items-center">
             {isSearchVisible ? (
               <div className="flex items-center bg-slate-50 rounded-full py-0.5 pl-3 sm:pl-4 pr-1 sm:pr-2 border-[1.5px] border-stefto-indigo shadow-sm">
@@ -208,7 +208,7 @@ const NavBar = () => {
             ) : (
               <button onClick={() => setIsSearchVisible(true)} className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border-[1.5px] border-black bg-white text-stefto-indigo cursor-pointer flex items-center justify-center"><Search size={14} /></button>
             )}
-            
+
             {!isSearchVisible && (
               <Link to="/contact-us" className="btn-spark hidden md:inline-flex items-center justify-center relative overflow-hidden bg-stefto-indigo text-white py-1.5 sm:py-2 px-4 sm:px-5 rounded-full font-bold no-underline text-xs sm:text-sm">
                 Contact us
@@ -216,7 +216,7 @@ const NavBar = () => {
             )}
 
             {/* Hamburger - visible on mobile/tablet, hidden on desktop */}
-            <button 
+            <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="lg:hidden flex items-center justify-center bg-transparent border-none cursor-pointer text-stefto-indigo p-1 focus:outline-none"
             >
@@ -267,7 +267,7 @@ const Footer = () => (
         <div className="flex flex-col gap-2">
           <h4 className="footer-heading-spark text-sm sm:text-base font-bold mb-1 sm:mb-2">Company</h4>
           <Link to="/about-us" className="footer-link-spark text-xs sm:text-sm">About Us</Link>
-          <Link to="/careers" className="footer-link-spark text-xs sm:text-sm">Careers</Link>
+          <Link to="/careers/" className="footer-link-spark text-xs sm:text-sm">Careers</Link>
           <Link to="/security" className="footer-link-spark text-xs sm:text-sm">Security</Link>
           <Link to="/digital-lead-partner" className="footer-link-spark text-xs sm:text-sm">Partnership</Link>
           <Link to="/contact-us" className="footer-link-spark text-xs sm:text-sm">Contact us</Link>
