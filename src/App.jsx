@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import AboutUs from './pages/AboutUs';
@@ -38,6 +38,7 @@ import Telecom from './pages/Telecom';
 import TermsOfUse from './pages/TermsOfUse';
 import TheSignificanceOfRecoveryManagementSolutionsInCurrentTimes from './pages/TheSignificanceOfRecoveryManagementSolutionsInCurrentTimes';
 import TravelHospitalityAndCargo from './pages/TravelHospitalityAndCargo';
+import Blog from './pages/Blog';
 
 import { Phone, Mail, MapPin, ChevronDown, Search, Menu, X } from 'lucide-react';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaYoutube } from 'react-icons/fa';
@@ -123,6 +124,19 @@ const NavBar = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeMenu, setActiveMenu] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const searchRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setIsSearchVisible(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [searchRef]);
 
   return (
     <header className="w-full sticky top-0 z-[1000] shadow-md">
@@ -158,35 +172,37 @@ const NavBar = () => {
                 onMouseEnter={() => setActiveMenu(label)}
                 onMouseLeave={() => setActiveMenu(null)}
               >
-                <span className={`flex items-center gap-1 px-2 py-1.5 rounded-md cursor-pointer transition-all text-sm font-semibold ${activeMenu === label ? 'text-stefto-blue bg-slate-100' : 'text-slate-800'}`}>
-                  {label} <ChevronDown size={12} />
+                <span className={`flex items-center gap-1.5 px-3 py-2 rounded-md cursor-pointer transition-all text-[17px] font-bold ${activeMenu === label ? 'text-stefto-indigo bg-slate-100 shadow-sm' : 'text-slate-900 hover:text-stefto-indigo'}`}>
+                  {label} <ChevronDown size={14} className={`transition-transform duration-300 ${activeMenu === label ? 'rotate-180' : ''}`} />
                 </span>
 
                 {activeMenu === label && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 z-[999]">
-                    <div className="bg-white shadow-2xl rounded-xl flex overflow-hidden border border-slate-200" style={{ minWidth: navMenus[label].layout === 'columns' ? 'auto' : '600px' }}>
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-[999]">
+                    <div className="bg-white shadow-2xl rounded-2xl flex overflow-hidden border border-slate-200" style={{ minWidth: navMenus[label].layout === 'columns' ? 'auto' : '650px' }}>
                       {navMenus[label].layout === 'columns' ? (
-                        <div className="flex w-[600px] h-[300px]">
+                        <div className="flex w-[650px] h-[320px]">
                           {navMenus[label].columns.map((col, idx) => (
-                            <Link key={idx} to={col.to} className="flex-1 relative bg-cover bg-center flex items-end no-underline p-4" style={{ backgroundImage: `url(${col.image})` }}>
-                              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/85"></div>
-                              <span className="relative z-[1] text-white text-lg font-extrabold">{col.label}</span>
+                            <Link key={idx} to={col.to} className="flex-1 relative bg-cover bg-center flex items-end no-underline p-6 group/item" style={{ backgroundImage: `url(${col.image})` }}>
+                              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/90 group-hover/item:to-stefto-navy/95 transition-all"></div>
+                              <span className="relative z-[1] text-white text-xl font-black tracking-tight">{col.label}</span>
                             </Link>
                           ))}
                         </div>
                       ) : (
                         <>
-                          <div className="flex-1 p-5">
-                            <p className="text-stefto-blue font-bold text-sm mb-3" style={{ color: '#0033cc' }}>{navMenus[label].heading}</p>
-                            {navMenus[label].links.map((link, i) => (
-                              <Link key={i} to={link.to} onClick={() => setActiveMenu(null)} className="block text-slate-800 no-underline py-2 text-sm font-medium border-b border-slate-50">{link.label}</Link>
-                            ))}
+                          <div className="flex-1 p-8">
+                            <p className="text-stefto-indigo font-black text-xs uppercase tracking-[0.2em] mb-6">{navMenus[label].heading}</p>
+                            <div className="flex flex-col gap-1">
+                              {navMenus[label].links.map((link, i) => (
+                                <Link key={i} to={link.to} onClick={() => setActiveMenu(null)} className="block text-slate-700 no-underline py-2.5 text-[15px] font-bold hover:text-stefto-indigo hover:translate-x-1 transition-all border-b border-slate-50 last:border-0">{link.label}</Link>
+                              ))}
+                            </div>
                           </div>
-                          <div className="flex-1 relative bg-cover p-5 text-white" style={{ background: navMenus[label].panel.type === 'dark' ? '#041434' : 'transparent', backgroundImage: navMenus[label].panel.image ? `url(${navMenus[label].panel.image})` : 'none', backgroundSize: 'cover' }}>
-                            <div className="absolute inset-0 bg-[rgba(4,20,52,0.45)]"></div>
-                            <div className="relative z-[1] text-center">
-                              <h4 className="text-lg font-extrabold">{navMenus[label].panel.title}</h4>
-                              <p className="text-sm opacity-90" style={{ color: 'white' }}>{navMenus[label].panel.desc}</p>
+                          <div className="flex-1 relative bg-cover p-8 text-white flex flex-col justify-center text-center" style={{ background: navMenus[label].panel.type === 'dark' ? '#041434' : 'transparent', backgroundImage: navMenus[label].panel.image ? `url(${navMenus[label].panel.image})` : 'none', backgroundSize: 'cover' }}>
+                            <div className="absolute inset-0 bg-[rgba(4,20,52,0.6)] backdrop-blur-[2px]"></div>
+                            <div className="relative z-[1]">
+                              <h4 className="text-xl font-black mb-3">{navMenus[label].panel.title}</h4>
+                              <p className="text-sm font-medium opacity-80 leading-relaxed text-slate-200">{navMenus[label].panel.desc}</p>
                             </div>
                           </div>
                         </>
@@ -199,18 +215,25 @@ const NavBar = () => {
           </nav>
 
           {/* Right Actions */}
-          <div className="flex gap-2 sm:gap-3 items-center">
+          <div className="flex gap-4 items-center" ref={searchRef}>
             {isSearchVisible ? (
-              <div className="flex items-center bg-slate-50 rounded-full py-0.5 pl-3 sm:pl-4 pr-1 sm:pr-2 border-[1.5px] border-stefto-indigo shadow-sm">
-                <input type="text" placeholder="Search..." autoFocus className="border-none bg-transparent outline-none text-xs sm:text-sm w-[80px] sm:w-[120px] lg:w-[150px]" />
-                <button onClick={() => setIsSearchVisible(false)} className="bg-transparent border-none cursor-pointer p-1"><X size={14} /></button>
+              <div className="flex items-center bg-white rounded-full py-1.5 pl-5 pr-2 border-2 border-stefto-indigo shadow-lg transition-all duration-300">
+                <input 
+                  type="text" 
+                  placeholder="Search articles..." 
+                  autoFocus 
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="border-none bg-transparent outline-none text-[15px] font-medium w-[150px] lg:w-[200px]" 
+                />
+                <button onClick={() => setIsSearchVisible(false)} className="bg-slate-100 rounded-full cursor-pointer p-1.5 hover:bg-slate-200 transition-colors"><X size={16} /></button>
               </div>
             ) : (
-              <button onClick={() => setIsSearchVisible(true)} className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border-[1.5px] border-black bg-white text-stefto-indigo cursor-pointer flex items-center justify-center"><Search size={14} /></button>
+              <button onClick={() => setIsSearchVisible(true)} className="w-10 h-10 rounded-full border-2 border-slate-200 bg-white text-stefto-indigo cursor-pointer flex items-center justify-center hover:border-stefto-indigo hover:shadow-md transition-all"><Search size={18} /></button>
             )}
 
             {!isSearchVisible && (
-              <Link to="/contact-us" className="btn-spark hidden md:inline-flex items-center justify-center relative overflow-hidden bg-stefto-indigo text-white py-1.5 sm:py-2 px-4 sm:px-5 rounded-full font-bold no-underline text-xs sm:text-sm">
+              <Link to="/contact-us" className="btn-spark hidden lg:inline-flex items-center justify-center relative overflow-hidden bg-stefto-indigo text-white py-2 px-6 rounded-full font-bold no-underline text-[13px] uppercase tracking-widest hover:bg-stefto-navy transition-all shadow-xl hover:shadow-2xl active:scale-95">
                 Contact us
               </Link>
             )}
@@ -393,6 +416,7 @@ const App = () => {
         <Route path="/terms-of-use" element={<TermsOfUse />} />
         <Route path="/the-significance-of-recovery-management-solutions-in-current-times" element={<TheSignificanceOfRecoveryManagementSolutionsInCurrentTimes />} />
         <Route path="/travel-hospitality-and-cargo" element={<TravelHospitalityAndCargo />} />
+        <Route path="/blogs" element={<Blog />} />
       </Routes>
       <Footer />
     </Router>

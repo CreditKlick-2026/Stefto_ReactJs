@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Target, Eye, Rocket, CheckCircle2, Shield, Zap, TrendingUp, Users, Cpu, FileAudio, ListOrdered, ClipboardCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const ValueCard = ({ icon: Icon, title, desc }) => (
-  <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col group">
-    <div className="w-14 h-14 bg-blue-50 text-[#1a237e] rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-      <Icon size={28} strokeWidth={1.5} />
+  <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col group h-full">
+    <div className="w-12 h-12 bg-blue-50 text-[#1a237e] rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+      <Icon size={24} strokeWidth={1.5} />
     </div>
-    <h3 className="text-xl font-bold text-[#041434] mb-4">{title}</h3>
-    <p className="text-slate-600 leading-relaxed font-light flex-1">{desc}</p>
+    <h3 className="text-lg font-bold text-[#041434] mb-2">{title}</h3>
+    <p className="text-slate-500 leading-relaxed font-normal text-xs sm:text-sm flex-1">{desc}</p>
   </div>
 );
 
@@ -25,15 +25,38 @@ const TimelineItem = ({ year, title, desc }) => (
 );
 
 const AboutUs = () => {
+  const carouselRef = useRef(null);
+
   useEffect(() => {
     window.scrollTo(0, 0);
+    
+    // Auto-scroll logic for mobile carousel
+    let scrollInterval;
+    if (window.innerWidth < 768) {
+      scrollInterval = setInterval(() => {
+        if (carouselRef.current) {
+          const container = carouselRef.current;
+          const cardWidth = container.offsetWidth * 0.85 + 24; // Width + gap
+          const currentScroll = container.scrollLeft;
+          const maxScroll = container.scrollWidth - container.offsetWidth;
+
+          if (currentScroll >= maxScroll - 10) {
+            container.scrollTo({ left: 0, behavior: 'smooth' });
+          } else {
+            container.scrollBy({ left: cardWidth, behavior: 'smooth' });
+          }
+        }
+      }, 3500);
+    }
+
+    return () => clearInterval(scrollInterval);
   }, []);
 
   return (
-    <main className="w-full bg-slate-50 min-h-screen pt-[60px] sm:pt-[70px] lg:pt-[80px] overflow-x-hidden">
+    <main className="w-full bg-slate-50 min-h-screen overflow-x-hidden">
       
-      {/* Our Story Section (Screenshot 1 & 2 integration) */}
-      <section className="w-full py-20 bg-white border-b border-slate-100">
+      {/* 1. Our Story Section (Screenshot 1 & 2 integration) */}
+      <section className="w-full pt-10 sm:pt-16 pb-6 bg-white border-b border-slate-100">
         <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl sm:text-5xl font-extrabold text-[#041434] mb-4">Our Story</h2>
           <p className="text-xl text-slate-600 mb-10 font-medium">We provide industry-leading services designed to achieve your objectives.</p>
@@ -53,7 +76,7 @@ const AboutUs = () => {
       </section>
 
       {/* About Us Sub-intro (Screenshot 5) */}
-      <section className="w-full py-16 bg-white relative z-20">
+      <section className="w-full pt-4 pb-6 bg-white relative z-20">
         <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-[#3b82f6] font-semibold text-sm mb-4 tracking-wide uppercase">
             Stefto People. Process. Performance.
@@ -65,38 +88,42 @@ const AboutUs = () => {
         </div>
       </section>
 
-
-
       {/* Mission, Vision, Goals */}
-      <section className="w-full py-16 bg-white relative z-20">
+      <section className="w-full pt-4 pb-12 bg-white relative z-20 overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 rounded-2xl bg-white">
-            <div className="p-8 sm:p-10 border border-slate-100 rounded-xl shadow-sm">
-              <div className="w-16 h-16 bg-blue-50 text-[#3b82f6] rounded-full flex items-center justify-center mb-6">
-                <Target size={32} />
+          <div 
+            ref={carouselRef}
+            className="flex overflow-x-auto gap-4 sm:gap-6 pb-8 sm:pb-0 md:grid md:grid-cols-3 snap-x snap-mandatory scrollbar-hide"
+          >
+            {/* Goal Card */}
+            <div className="min-w-[280px] md:min-w-0 snap-center p-6 sm:p-10 border border-slate-100 rounded-xl shadow-sm bg-white">
+              <div className="w-14 h-14 bg-blue-50 text-[#3b82f6] rounded-full flex items-center justify-center mb-6">
+                <Target size={28} />
               </div>
-              <h2 className="text-2xl font-bold text-[#041434] mb-4">Goals</h2>
-              <p className="text-slate-600 leading-relaxed text-sm">
+              <h2 className="text-xl font-bold text-[#041434] mb-3">Goals</h2>
+              <p className="text-slate-600 leading-relaxed text-xs sm:text-sm">
                 We tackle our clients' most difficult problems by offering exceptional services in strategy, consulting, digital, technology, and operations. Our goal is to drive innovation that enhances both the way the world operates and the quality of life.
               </p>
             </div>
             
-            <div className="p-8 sm:p-10 border border-slate-100 rounded-xl shadow-sm">
-              <div className="w-16 h-16 bg-indigo-50 text-[#1a237e] rounded-full flex items-center justify-center mb-6">
-                <Rocket size={32} />
+            {/* Mission Card */}
+            <div className="min-w-[280px] md:min-w-0 snap-center p-6 sm:p-10 border border-slate-100 rounded-xl shadow-sm bg-white">
+              <div className="w-14 h-14 bg-indigo-50 text-[#1a237e] rounded-full flex items-center justify-center mb-6">
+                <Rocket size={28} />
               </div>
-              <h2 className="text-2xl font-bold text-[#041434] mb-4">Mission</h2>
-              <p className="text-slate-600 leading-relaxed text-sm">
+              <h2 className="text-xl font-bold text-[#041434] mb-3">Mission</h2>
+              <p className="text-slate-600 leading-relaxed text-xs sm:text-sm">
                 To shape the future of the Business Process Management industry by pioneering transformational technologies and capabilities. We strive to stay ahead of the curve to drive growth for our customers, deliver value to investors, and enrich overall experiences.
               </p>
             </div>
             
-            <div className="p-8 sm:p-10 border border-slate-100 rounded-xl shadow-sm">
-              <div className="w-16 h-16 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center mb-6">
-                <Eye size={32} />
+            {/* Vision Card */}
+            <div className="min-w-[280px] md:min-w-0 snap-center p-6 sm:p-10 border border-slate-100 rounded-xl shadow-sm bg-white">
+              <div className="w-14 h-14 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center mb-6">
+                <Eye size={28} />
               </div>
-              <h2 className="text-2xl font-bold text-[#041434] mb-4">Vision</h2>
-              <p className="text-slate-600 leading-relaxed text-sm">
+              <h2 className="text-xl font-bold text-[#041434] mb-3">Vision</h2>
+              <p className="text-slate-600 leading-relaxed text-xs sm:text-sm">
                 Our aim is to lead in the markets we target and be recognized as the most trusted partner by our global clients. We will achieve this by streamlining complex business processes with advanced technology and top-notch industry practices.
               </p>
             </div>
@@ -105,7 +132,7 @@ const AboutUs = () => {
       </section>
 
       {/* The Stefto Story & Timeline */}
-      <section className="w-full py-16 sm:py-24 bg-slate-50 relative z-10">
+      <section className="w-full pt-10 pb-8 sm:py-24 bg-slate-50 relative z-10">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
             
@@ -199,7 +226,7 @@ const AboutUs = () => {
       </section>
 
       {/* Services & Offerings (Screenshot 3 & 4 data) */}
-      <section className="w-full py-16 sm:py-24 bg-slate-50 relative">
+      <section className="w-full pt-8 pb-8 sm:py-24 bg-slate-50 relative">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-12">
             <h2 className="text-4xl sm:text-5xl font-extrabold text-[#041434] mb-4">Services Offered</h2>
@@ -246,7 +273,7 @@ const AboutUs = () => {
       </section>
 
       {/* Technology Section */}
-      <section className="w-full py-16 sm:py-24 bg-white relative">
+      <section className="w-full pt-8 pb-16 sm:py-24 bg-white relative">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl sm:text-5xl font-extrabold text-[#041434]">Technology</h2>
@@ -321,27 +348,36 @@ const AboutUs = () => {
       </section>
 
       {/* Our Partner Section */}
-      <section className="w-full py-16 bg-white border-t border-slate-100 relative">
+      <section className="w-full py-16 bg-white border-t border-slate-100 overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-[#041434]">Our Partner</h2>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#041434]">Our Partners</h2>
           </div>
           
-          <div className="flex flex-wrap justify-center gap-6 sm:gap-10">
-            {[
-              "BAJAJ", "CASHE", "HINDUJA", "ZEST", 
-              "YES BANK", "IDFC", "AU", "TATA", "PAYTM"
-            ].map((partner, index) => (
-              <div key={index} className="px-6 py-4 bg-slate-50 border border-slate-200 rounded-lg shadow-sm flex items-center justify-center min-w-[140px] hover:border-[#3b82f6] hover:shadow-md transition-all duration-300">
-                <span className="text-lg sm:text-xl font-black text-slate-400 tracking-wider uppercase">{partner}</span>
-              </div>
-            ))}
+          <div className="ticker-container">
+            <div className="ticker-content gap-12 sm:gap-20 items-center">
+              {[1, 2].map((loop) => (
+                <div key={loop} className="flex gap-12 sm:gap-20 items-center px-6">
+                  {[
+                    "BAJAJ", "CASHE", "HINDUJA", "ZEST", 
+                    "YES BANK", "IDFC", "AU", "TATA", "PAYTM"
+                  ].map((partner, index) => (
+                    <div 
+                      key={`${loop}-${index}`}
+                      className="px-5 py-3 bg-slate-50 border border-slate-100 rounded-lg flex items-center justify-center min-w-[120px] transition-all duration-300"
+                    >
+                      <span className="text-base sm:text-lg font-black text-slate-300 tracking-widest uppercase">{partner}</span>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Core Values */}
-      <section className="w-full py-16 sm:py-24 bg-slate-50 relative">
+      <section className="w-full py-16 sm:py-24 bg-white relative">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 max-w-3xl mx-auto">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#041434] mb-6">What we value</h2>
@@ -350,7 +386,7 @@ const AboutUs = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <ValueCard 
               icon={Shield} 
               title="Professionalism" 
@@ -388,11 +424,25 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* Legal Footer */}
-      <section className="w-full py-8 bg-[#041434] border-t border-white/10 text-center px-4 sm:px-6">
-        <div className="max-w-[1280px] mx-auto text-slate-400 text-sm">
-          <p className="mb-2">Copyright © 2026 Stefto Management Services | Powered by Astra WordPress Theme</p>
-          <p>Stefto is the trade name of Incredible Management Services (India) Private Limited (CIN: U74140DL2...)</p>
+      {/* Location Map */}
+      <section className="w-full bg-white relative pb-16">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#041434] mb-4">Our Presence</h2>
+            <p className="text-slate-500 font-medium tracking-wide">VISIT OUR HEADQUARTERS IN GURUGRAM</p>
+          </div>
+          <div className="w-full h-[400px] rounded-3xl overflow-hidden shadow-2xl border-8 border-white bg-white">
+            <iframe 
+              src="https://maps.google.com/maps?q=Plot%20No.%20112,%20Udyog%20Vihar%20Phase%201,%20Gurugram,%20Haryana%20122016&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+              width="100%" 
+              height="100%" 
+              style={{ border: 0 }} 
+              allowFullScreen="" 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Stefto Headquarters Location"
+            ></iframe>
+          </div>
         </div>
       </section>
 

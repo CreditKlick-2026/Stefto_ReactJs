@@ -112,6 +112,27 @@ body {
   border-color: rgba(255, 255, 255, 0.2);
 }
 
+@keyframes scrollTicker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.ticker-content {
+  display: flex !important;
+  width: max-content !important;
+  animation: scrollTicker 35s linear infinite;
+}
+
+.ticker-content:hover {
+  animation-play-state: paused;
+}
+
 .glass-nav {
   position: fixed;
   top: 0;
