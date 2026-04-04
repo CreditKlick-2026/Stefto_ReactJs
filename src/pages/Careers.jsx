@@ -9,10 +9,10 @@ const Careers = () => {
   }, []);
 
   return (
-    <main className="w-full bg-slate-50 min-h-screen pt-[60px] sm:pt-[70px] lg:pt-[80px]">
+    <main className="w-full bg-white min-h-screen">
       
       {/* 1. Join The Family Section */}
-      <section className="w-full py-16 sm:py-24 bg-white">
+      <section className="w-full pt-4 pb-16 sm:pt-6 sm:pb-24 bg-white">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-[900px]">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-800 mb-6 lg:mb-10">
@@ -127,7 +127,7 @@ const Careers = () => {
                 <h3 className="text-xl sm:text-2xl font-bold text-[#2d3a4b] mb-3 font-serif tracking-tight">Voice (Sales)</h3>
                 <p className="text-[#475569] text-sm font-medium">Gurgaon, Noida</p>
               </div>
-              <button className="bg-[#344458] text-white text-[11px] tracking-[0.15em] font-semibold py-3 px-6 mt-8 w-fit hover:bg-[#1e293b] transition-colors flex items-center group">
+              <button className="bg-stefto-indigo text-white text-[11px] tracking-[0.15em] font-semibold py-3 px-6 mt-8 w-fit hover:bg-stefto-navy transition-colors flex items-center group">
                 APPLY NOW <span className="ml-3 group-hover:translate-x-1 transition-transform">→</span>
               </button>
             </div>
@@ -139,7 +139,7 @@ const Careers = () => {
                 <h3 className="text-xl sm:text-2xl font-bold text-[#2d3a4b] mb-3 font-serif tracking-tight">Voice (Recovery)</h3>
                 <p className="text-[#475569] text-sm font-medium">Gurgaon, Noida, Delhi</p>
               </div>
-              <button className="bg-[#344458] text-white text-[11px] tracking-[0.15em] font-semibold py-3 px-6 mt-8 w-fit hover:bg-[#1e293b] transition-colors flex items-center group">
+              <button className="bg-stefto-indigo text-white text-[11px] tracking-[0.15em] font-semibold py-3 px-6 mt-8 w-fit hover:bg-stefto-navy transition-colors flex items-center group">
                 APPLY NOW <span className="ml-3 group-hover:translate-x-1 transition-transform">→</span>
               </button>
             </div>
@@ -151,7 +151,7 @@ const Careers = () => {
                 <h3 className="text-xl sm:text-2xl font-bold text-[#2d3a4b] mb-3 font-serif tracking-tight">A.M (Sales)</h3>
                 <p className="text-[#475569] text-sm font-medium">Gurgaon, Noida, Delhi</p>
               </div>
-              <button className="bg-[#344458] text-white text-[11px] tracking-[0.15em] font-semibold py-3 px-6 mt-8 w-fit hover:bg-[#1e293b] transition-colors flex items-center group">
+              <button className="bg-stefto-indigo text-white text-[11px] tracking-[0.15em] font-semibold py-3 px-6 mt-8 w-fit hover:bg-stefto-navy transition-colors flex items-center group">
                 APPLY NOW <span className="ml-3 group-hover:translate-x-1 transition-transform">→</span>
               </button>
             </div>
@@ -163,7 +163,7 @@ const Careers = () => {
                 <h3 className="text-xl sm:text-2xl font-bold text-[#2d3a4b] mb-3 font-serif tracking-tight">A.M (Recovery)</h3>
                 <p className="text-[#475569] text-sm font-medium">Gurgaon</p>
               </div>
-              <button className="bg-[#344458] text-white text-[11px] tracking-[0.15em] font-semibold py-3 px-6 mt-8 w-fit hover:bg-[#1e293b] transition-colors flex items-center group">
+              <button className="bg-stefto-indigo text-white text-[11px] tracking-[0.15em] font-semibold py-3 px-6 mt-8 w-fit hover:bg-stefto-navy transition-colors flex items-center group">
                 APPLY NOW <span className="ml-3 group-hover:translate-x-1 transition-transform">→</span>
               </button>
             </div>
@@ -179,7 +179,7 @@ const Careers = () => {
                 <h3 className="text-xl sm:text-2xl font-bold text-[#2d3a4b] mb-3 font-serif tracking-tight">H.R (Hiring)</h3>
                 <p className="text-[#475569] text-sm font-medium">Gurgaon, Noida, Delhi</p>
               </div>
-              <button className="bg-[#344458] text-white text-[11px] tracking-[0.15em] font-semibold py-3 px-6 mt-8 w-fit hover:bg-[#1e293b] transition-colors flex items-center group">
+              <button className="bg-stefto-indigo text-white text-[11px] tracking-[0.15em] font-semibold py-3 px-6 mt-8 w-fit hover:bg-stefto-navy transition-colors flex items-center group">
                 APPLY NOW <span className="ml-3 group-hover:translate-x-1 transition-transform">→</span>
               </button>
             </div>
@@ -191,7 +191,7 @@ const Careers = () => {
                 <h3 className="text-xl sm:text-2xl font-bold text-[#2d3a4b] mb-3 font-serif tracking-tight">Trainer (Sales)</h3>
                 <p className="text-[#475569] text-sm font-medium">Gurgaon, Noida, Delhi</p>
               </div>
-              <button className="bg-[#344458] text-white text-[11px] tracking-[0.15em] font-semibold py-3 px-6 mt-8 w-fit hover:bg-[#1e293b] transition-colors flex items-center group">
+              <button className="bg-stefto-indigo text-white text-[11px] tracking-[0.15em] font-semibold py-3 px-6 mt-8 w-fit hover:bg-stefto-navy transition-colors flex items-center group">
                 APPLY NOW <span className="ml-3 group-hover:translate-x-1 transition-transform">→</span>
               </button>
             </div>
@@ -203,7 +203,7 @@ const Careers = () => {
                 <h3 className="text-xl sm:text-2xl font-bold text-[#2d3a4b] mb-3 font-serif tracking-tight">M.I.S</h3>
                 <p className="text-[#475569] text-sm font-medium">Gurgaon, Noida, Delhi</p>
               </div>
-              <button className="bg-[#344458] text-white text-[11px] tracking-[0.15em] font-semibold py-3 px-6 mt-8 w-fit hover:bg-[#1e293b] transition-colors flex items-center group">
+              <button className="bg-stefto-indigo text-white text-[11px] tracking-[0.15em] font-semibold py-3 px-6 mt-8 w-fit hover:bg-stefto-navy transition-colors flex items-center group">
                 APPLY NOW <span className="ml-3 group-hover:translate-x-1 transition-transform">→</span>
               </button>
             </div>
@@ -215,7 +215,7 @@ const Careers = () => {
                 <h3 className="text-xl sm:text-2xl font-bold text-[#2d3a4b] mb-3 font-serif tracking-tight">Manager (Recovery)</h3>
                 <p className="text-[#475569] text-sm font-medium">Gurgaon, Noida, Delhi</p>
               </div>
-              <button className="bg-[#344458] text-white text-[11px] tracking-[0.15em] font-semibold py-3 px-6 mt-8 w-fit hover:bg-[#1e293b] transition-colors flex items-center group">
+              <button className="bg-stefto-indigo text-white text-[11px] tracking-[0.15em] font-semibold py-3 px-6 mt-8 w-fit hover:bg-stefto-navy transition-colors flex items-center group">
                 APPLY NOW <span className="ml-3 group-hover:translate-x-1 transition-transform">→</span>
               </button>
             </div>
@@ -251,7 +251,7 @@ const Careers = () => {
                 exciting opportunities. Don't miss out on your dream job - sign up today to 
                 stay informed and take the next step in your professional journey
               </p>
-              <button className="bg-[#344458] text-white tracking-[0.15em] font-semibold py-3 sm:py-4 px-8 w-fit hover:bg-[#1e293b] transition-colors text-xs sm:text-sm">
+              <button className="bg-stefto-indigo text-white tracking-[0.15em] font-semibold py-3 sm:py-4 px-8 w-fit hover:bg-stefto-navy transition-colors text-xs sm:text-sm">
                 REGISTER NOW
               </button>
             </div>
@@ -279,7 +279,7 @@ const Careers = () => {
             Through financial clarity, we provide you with the financial confidence you need to achieve.<br className="hidden sm:block" />
             And, that's just the beginning.
           </p>
-          <button className="bg-[#12315a] hover:bg-[#0b1f3c] transition-colors text-white font-semibold py-3 sm:py-4 px-8 text-sm sm:text-base tracking-wide shadow-xl rounded-sm">
+          <button className="bg-stefto-indigo hover:bg-stefto-navy transition-colors text-white font-semibold py-3 sm:py-4 px-8 text-sm sm:text-base tracking-wide shadow-xl rounded-sm">
             Get a Free Quote
           </button>
         </div>
