@@ -341,12 +341,8 @@ const Footer = () => (
           <div><strong>Pune Office:</strong> 501, 5th Floor, Pride Icon, Kharadi, Pune, Maharashtra-411014</div>
         </div>
 
-        {/* Demo & Social */}
+        {/* Social */}
         <div className="text-left lg:text-right">
-          <h4 className="text-base sm:text-lg font-extrabold mb-1">For Booking a Demo</h4>
-          <p className="text-xs sm:text-sm mb-4 sm:mb-5 opacity-85" style={{ color: 'white' }}>
-            Mobile: +91 8800-101-102. Email: info@stefto.com
-          </p>
           <div className="flex gap-2 sm:gap-3 justify-start lg:justify-end">
             {[FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaYoutube].map((Icon, idx) => (
               <a key={idx} href="#" className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white text-stefto-navy flex items-center justify-center no-underline transition-all hover:-translate-y-1 hover:shadow-lg">
