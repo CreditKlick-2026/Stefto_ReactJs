@@ -36,44 +36,26 @@ const ContactUs = () => {
         </div>
       </section>
 
-      {/* 1.5. Offices Quick Nav (Animated Marquee) */}
-      <section className="w-full bg-slate-50 border-b border-slate-200 py-4 sm:py-6 relative z-10 overflow-hidden">
-        <style>
-          {`
-            @keyframes traverse-right {
-              0% { transform: translateX(-50%); }
-              100% { transform: translateX(0%); }
-            }
-            .animate-traverse-right {
-              animation: traverse-right 25s linear infinite;
-              will-change: transform;
-            }
-            .animate-traverse-right:hover {
-              animation-play-state: paused;
-            }
-          `}
-        </style>
-
-        <div className="flex w-max animate-traverse-right items-center gap-2 sm:gap-3 pr-2 sm:pr-3">
-          {[1, 2, 3, 4].map((_, index) => (
-            <React.Fragment key={index}>
-              <button className="min-w-[150px] sm:min-w-[200px] bg-[#1a237e] text-white py-3 sm:py-4 px-4 rounded-md font-semibold text-sm sm:text-base transition-all hover:bg-[#1a237e]/90 shadow-sm text-center whitespace-nowrap">
-                Head Office
-              </button>
-              <button className="min-w-[150px] sm:min-w-[200px] bg-[#0066cc] hover:bg-[#0052a3] text-white py-3 sm:py-4 px-4 rounded-md font-semibold text-sm sm:text-base transition-all shadow-sm text-center whitespace-nowrap">
-                Noida Office
-              </button>
-              <button className="min-w-[150px] sm:min-w-[200px] bg-[#0066cc] hover:bg-[#0052a3] text-white py-3 sm:py-4 px-4 rounded-md font-semibold text-sm sm:text-base transition-all shadow-sm text-center whitespace-nowrap">
-                New Delhi Office
-              </button>
-              <button className="min-w-[150px] sm:min-w-[200px] bg-[#0066cc] hover:bg-[#0052a3] text-white py-3 sm:py-4 px-4 rounded-md font-semibold text-sm sm:text-base transition-all shadow-sm text-center whitespace-nowrap">
-                West Delhi Office
-              </button>
-              <button className="min-w-[150px] sm:min-w-[200px] bg-[#0066cc] hover:bg-[#0052a3] text-white py-3 sm:py-4 px-4 rounded-md font-semibold text-sm sm:text-base transition-all shadow-sm text-center whitespace-nowrap">
-                Pune Office
-              </button>
-            </React.Fragment>
-          ))}
+      {/* 1.5. Offices Quick Nav */}
+      <section className="w-full bg-slate-50 border-b border-slate-200 py-4 sm:py-6 relative z-10">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+            <button className="flex-1 min-w-[150px] sm:min-w-[200px] bg-[#1a237e] text-white py-3 sm:py-4 px-4 rounded-md font-semibold text-sm sm:text-base transition-all hover:bg-[#1a237e]/90 shadow-sm text-center">
+              Head Office
+            </button>
+            <button className="flex-1 min-w-[150px] sm:min-w-[200px] bg-[#0066cc] hover:bg-[#0052a3] text-white py-3 sm:py-4 px-4 rounded-md font-semibold text-sm sm:text-base transition-all shadow-sm text-center">
+              Noida Office
+            </button>
+            <button className="flex-1 min-w-[150px] sm:min-w-[200px] bg-[#0066cc] hover:bg-[#0052a3] text-white py-3 sm:py-4 px-4 rounded-md font-semibold text-sm sm:text-base transition-all shadow-sm text-center">
+              New Delhi Office
+            </button>
+            <button className="flex-1 min-w-[150px] sm:min-w-[200px] bg-[#0066cc] hover:bg-[#0052a3] text-white py-3 sm:py-4 px-4 rounded-md font-semibold text-sm sm:text-base transition-all shadow-sm text-center">
+              West Delhi Office
+            </button>
+            <button className="flex-1 min-w-[150px] sm:min-w-[200px] bg-[#0066cc] hover:bg-[#0052a3] text-white py-3 sm:py-4 px-4 rounded-md font-semibold text-sm sm:text-base transition-all shadow-sm text-center">
+              Pune Office
+            </button>
+          </div>
         </div>
       </section>
 
