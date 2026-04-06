@@ -218,13 +218,13 @@ const NavBar = () => {
           <div className="flex gap-4 items-center" ref={searchRef}>
             {isSearchVisible ? (
               <div className="flex items-center bg-white rounded-full py-1.5 pl-5 pr-2 border-2 border-stefto-indigo shadow-lg transition-all duration-300">
-                <input 
-                  type="text" 
-                  placeholder="Search articles..." 
-                  autoFocus 
+                <input
+                  type="text"
+                  placeholder="Search articles..."
+                  autoFocus
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="border-none bg-transparent outline-none text-[15px] font-medium w-[150px] lg:w-[200px]" 
+                  className="border-none bg-transparent outline-none text-[15px] font-medium w-[150px] lg:w-[200px]"
                 />
                 <button onClick={() => setIsSearchVisible(false)} className="bg-slate-100 rounded-full cursor-pointer p-1.5 hover:bg-slate-200 transition-colors"><X size={16} /></button>
               </div>
@@ -343,6 +343,9 @@ const Footer = () => (
 
         {/* Social */}
         <div className="text-left lg:text-right">
+          <p className="text-xs sm:text-sm mb-4 sm:mb-5 opacity-85" style={{ color: 'white' }}>
+            Mobile: +91 8800-101-102. Email: info@stefto.com
+          </p>
           <div className="flex gap-2 sm:gap-3 justify-start lg:justify-end">
             {[FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaYoutube].map((Icon, idx) => (
               <a key={idx} href="#" className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white text-stefto-navy flex items-center justify-center no-underline transition-all hover:-translate-y-1 hover:shadow-lg">
