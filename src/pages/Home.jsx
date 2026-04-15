@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import heroImage from '../assets/image.png';
 import endeavorsImage from '../assets/our_endeavors.png';
@@ -10,12 +10,116 @@ import news3 from '../assets/news_digital_transformation_1775211635494.png';
 import mediaBg from '../assets/media_blocks_bg_1775212185626.png';
 import globalBg from '../assets/global_interactions.png';
 import mediaLogo from '../assets/media_logo_placeholder_1775212084849.png';
-import brandLogo from '../assets/brand_logo_placeholder_1775212449786.png';
+// Partner logos loaded from public/assets/partners/
 import {
   Users, Globe, Zap, MessageSquare,
   Phone, Globe2, Link as LinkIcon, Download,
   Star, ArrowRight
 } from 'lucide-react';
+
+// ── Testimonial Data (from stefto_client_repo) ──────────────────────────────
+const uniqueTestimonials = [
+  {
+    name: "Mrs. Sumona",
+    company: "(AGENCY MANAGER) - CITI BANK",
+    text: "Stefto knows how to run any project aggressively for Banks/NBFCs needs and really understands the process delivery in terms of debt collection and recovery. They are also very helpful with competitive intelligence along with technology."
+  },
+  {
+    name: "Ajay Yadav",
+    company: "(COLLECTION HEAD - UNSECURED) - HEROFIN CORP",
+    text: "Stefto has been instrumental in building the business right from any stage of its growth and into any vertical. Their understanding of our product has helped us in achieving the goals with technical logic. They have also helped us in late-stage collections and continue to partner of preference with us as we scale up."
+  },
+  {
+    name: "Mr. Vineet Kakkar",
+    company: "(ZONAL HEAD) - SBIC",
+    text: "It has been a great experience and continuous journey with the Stefto Team. The organisation has strong leadership in delivery and managing the businesses very effectively. What sets them apart is their vested interest in understanding the nuances of the business and the culture of the organization."
+  }
+];
+
+// Duplicate 10× for seamless infinite loop on wide screens
+const allTestimonials = [];
+for (let i = 0; i < 10; i++) allTestimonials.push(...uniqueTestimonials);
+
+const TestimonialSlider = () => {
+  const scrollRef = useRef(null);
+  const [isPaused, setIsPaused] = useState(false);
+  const isPausedRef = useRef(false);
+
+  useEffect(() => { isPausedRef.current = isPaused; }, [isPaused]);
+
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+    const oneSetWidth = container.scrollWidth / 10;
+    container.scrollLeft = oneSetWidth * 4;
+
+    const autoScroll = () => {
+      if (!isPausedRef.current) container.scrollLeft += 1.5;
+      const setWidth = container.scrollWidth / 10;
+      if (container.scrollLeft >= setWidth * 6) container.scrollLeft -= setWidth;
+      else if (container.scrollLeft <= setWidth * 2) container.scrollLeft += setWidth;
+    };
+    const interval = setInterval(autoScroll, 20);
+
+    const handleInfiniteScroll = () => {
+      const setWidth = container.scrollWidth / 10;
+      if (container.scrollLeft >= setWidth * 6) container.scrollLeft -= setWidth;
+      else if (container.scrollLeft <= setWidth * 2) container.scrollLeft += setWidth;
+    };
+    container.addEventListener('scroll', handleInfiniteScroll);
+    return () => { clearInterval(interval); container.removeEventListener('scroll', handleInfiniteScroll); };
+  }, []);
+
+  return (
+    <div
+      ref={scrollRef}
+      className="w-full overflow-x-auto py-4 flex cursor-grab active:cursor-grabbing"
+      style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      <div className="flex whitespace-nowrap">
+        {allTestimonials.map((t, index) => (
+          <div
+            key={index}
+            className="flex-shrink-0 w-[280px] sm:w-[340px] lg:w-[420px] mx-3 lg:mx-5"
+          >
+            <div className="bg-white rounded-xl sm:rounded-2xl p-5 sm:p-7 lg:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.25)] relative h-full flex flex-col justify-between whitespace-normal transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_30px_80px_rgba(0,0,0,0.35)] border border-white/10">
+              {/* Decorative blue circle */}
+              <div className="absolute -top-4 -right-4 w-14 h-14 bg-blue-600 rounded-full opacity-90 z-[1]"></div>
+              {/* Quote icon */}
+              <div className="absolute top-4 right-4 text-blue-100 z-[2]">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                </svg>
+              </div>
+              <div className="relative z-10">
+                {/* Stars */}
+                <div className="flex gap-1 mb-3 sm:mb-4">
+                  {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="#fbca1e" color="#fbca1e" className="sm:w-4 sm:h-4" />)}
+                </div>
+                {/* Review text */}
+                <p className="text-slate-600 text-xs sm:text-sm lg:text-base leading-relaxed font-normal">
+                  "{t.text}"
+                </p>
+              </div>
+              {/* Author */}
+              <div className="border-t border-slate-100 pt-4 mt-5 flex items-center gap-3 sm:gap-4 relative z-10">
+                <div className="w-9 h-9 sm:w-11 sm:h-11 flex-shrink-0 rounded-full bg-gradient-to-br from-stefto-indigo to-stefto-blue flex items-center justify-center text-white font-extrabold text-sm shadow-md">
+                  {t.name.replace(/^(Mr\.|Mrs\.)\s*/i, '').charAt(0)}
+                </div>
+                <div>
+                  <h4 className="font-extrabold text-sm sm:text-base text-slate-800 mb-0.5 tracking-tight">{t.name}</h4>
+                  <p className="text-[0.6rem] sm:text-[0.65rem] text-stefto-blue font-bold tracking-widest uppercase">{t.company}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 const StatCard = ({ icon: Icon, number, label }) => {
   const [count, setCount] = React.useState(0);
@@ -400,13 +504,13 @@ const Home = () => {
               <div className="w-8 sm:w-10 h-1 bg-stefto-blue rounded"></div>
             </div>
           </div>
-          <div className="w-full overflow-hidden relative h-[80px] sm:h-[100px] lg:h-[120px] flex items-center">
+          <div className="w-full overflow-hidden relative h-[100px] sm:h-[120px] lg:h-[140px] flex items-center">
             <style>{`@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }`}</style>
-            <div className="flex w-max gap-3 sm:gap-4 lg:gap-6" style={{ animation: 'marquee 60s linear infinite', willChange: 'transform' }}>
+            <div className="flex w-max gap-4 sm:gap-6 lg:gap-8" style={{ animation: 'marquee 40s linear infinite', willChange: 'transform' }}>
               {[...Array(2)].map((_, loopIdx) => (
                 <React.Fragment key={loopIdx}>
-                  {brandNames.map((name, idx) => (
-                    <BrandCard key={`${loopIdx}-${idx}`} name={name} />
+                  {partnerLogos.map((src, idx) => (
+                    <BrandCard key={`${loopIdx}-${idx}`} src={src} idx={idx} />
                   ))}
                 </React.Fragment>
               ))}
@@ -417,19 +521,20 @@ const Home = () => {
 
       {/* 10. Testimonials From Clients */}
       <section
-        className="py-12 sm:py-16 lg:py-28 relative"
+        className="py-12 sm:py-16 lg:py-24 relative overflow-hidden"
         style={{
           background: `linear-gradient(rgba(4, 20, 52, 0.6), rgba(4, 20, 52, 0.6)), url(${mediaBg})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}
       >
+        {/* Section Header */}
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-10 lg:mb-16">
-            <p className="text-white/80 text-[0.7rem] sm:text-xs lg:text-sm font-bold uppercase tracking-[0.15em] mb-2 lg:mb-3" style={{ color: 'rgba(255,255,255,0.8)' }}>
+          <div className="text-center mb-8 sm:mb-10 lg:mb-14">
+            <p className="text-[0.7rem] sm:text-xs lg:text-sm font-bold uppercase tracking-[0.15em] mb-2 lg:mb-3" style={{ color: 'rgba(255,255,255,0.75)' }}>
               WHAT OUR CLIENT SAY ABOUT STEFTO
             </p>
-            <h2 className="text-xl sm:text-2xl lg:text-[2.5rem] font-light text-white mb-4 lg:mb-5"
+            <h2 className="text-xl sm:text-2xl lg:text-[2.5rem] font-light mb-4 lg:mb-5"
               style={{ background: 'none', WebkitBackgroundClip: 'unset', backgroundClip: 'unset', color: 'white' }}>
               Testimonials From <span className="font-bold">Clients</span>
             </h2>
@@ -439,21 +544,10 @@ const Home = () => {
               <div className="w-10 sm:w-12 h-1 bg-stefto-sky rounded-sm"></div>
             </div>
           </div>
-
-          <div className="max-w-[1000px] mx-auto bg-white rounded-xl sm:rounded-2xl p-5 sm:p-8 lg:p-10 xl:px-16 shadow-[0_35px_80px_rgba(0,0,0,0.35)] relative overflow-hidden text-center">
-            <div className="absolute -top-8 -right-8 sm:-top-9 sm:-right-9 w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 bg-blue-600 rounded-full z-[1]"></div>
-            <div className="relative z-10">
-              <h3 className="text-lg sm:text-xl lg:text-[1.75rem] text-slate-800 font-extrabold mb-1 sm:mb-2">MR. VINEET KAKKAR</h3>
-              <p className="text-[0.7rem] sm:text-xs lg:text-sm text-slate-400 font-semibold uppercase tracking-[0.1em] mb-3 lg:mb-5" style={{ color: '#94a3b8' }}>(ZONAL HEAD) - SBIC</p>
-              <div className="flex justify-center gap-1 sm:gap-1.5 mb-4 lg:mb-6">
-                {[...Array(5)].map((_, i) => (<Star key={i} size={18} fill="#fbca1e" color="#fbca1e" className="sm:w-5 sm:h-5 lg:w-[22px] lg:h-[22px]" />))}
-              </div>
-              <p className="text-xs sm:text-sm lg:text-lg text-slate-400 leading-relaxed lg:leading-loose font-normal max-w-[850px] mx-auto" style={{ color: '#64748b' }}>
-                It has been a great experience and continuous journey with the Stefto Team. The organisation has strong leadership in delivery and managing the businesses very effectively. What sets them apart is their vested interest in understanding the nuances of the business and the culture of the organization.
-              </p>
-            </div>
-          </div>
         </div>
+
+        {/* Infinite Scrolling Slider — full width, no horizontal padding */}
+        <TestimonialSlider />
       </section>
 
       {/* 11. Latest Blogs */}
@@ -548,13 +642,7 @@ const Home = () => {
 
 // --- SUPPORTING COMPONENTS ---
 
-const brandNames = [
-  "Bajaj", "HDFC", "ICICI", "Reliance", "Tata", "Infosys", "Wipro", "Airtel", "Jio", "Zomato",
-  "Swiggy", "Ola", "Uber", "Amazon", "Google", "Microsoft", "Apple", "Samsung", "Nike", "Adidas",
-  "Puma", "Lenskart", "Nykaa", "Flipkart", "Paytm", "PhonePe", "Razorpay", "Indifi", "LendingKart", "OfBusiness",
-  "Stanza", "Byjus", "Unacademy", "PhysicsWallah", "Zerodha", "Groww", "Upstox", "Vedantu", "Delhivery", "BlueDart",
-  "Shiprocket", "Curefit", "PharmEasy", "MediBuddy", "PolicyBazaar", "UrbanCompany", "Meesho", "Snapdeal", "Pepperfry", "FirstCry"
-];
+const partnerLogos = Array.from({ length: 26 }, (_, i) => `/assets/partners/${i + 1}.png`);
 
 const BlogCard = ({ date, month, tags, title, excerpt }) => (
   <div className="bg-white rounded-lg p-5 sm:p-6 lg:p-8 pt-8 sm:pt-10 lg:pt-12 shadow-md relative transition-all duration-300 cursor-pointer border border-black/[0.02] h-full flex flex-col group hover:-translate-y-2 hover:shadow-xl">
@@ -582,12 +670,14 @@ const BlogCard = ({ date, month, tags, title, excerpt }) => (
   </div>
 );
 
-const BrandCard = ({ name }) => (
-  <div className="bg-white h-14 sm:h-16 lg:h-[75px] min-w-[160px] sm:min-w-[190px] lg:min-w-[220px] flex items-center justify-center rounded-lg sm:rounded-xl px-3 sm:px-4 lg:px-8 shadow-sm border border-black/[0.02] flex-shrink-0">
-    <div className="flex items-center gap-2 sm:gap-3">
-      <img src={brandLogo} alt={name} className="h-5 sm:h-6 lg:h-7 opacity-80 grayscale brightness-[1.2]" />
-      <span className="text-[0.7rem] sm:text-xs lg:text-sm text-slate-400 font-bold uppercase">{name}</span>
-    </div>
+const BrandCard = ({ src, idx }) => (
+  <div className="bg-white h-16 sm:h-20 lg:h-24 w-[140px] sm:w-[170px] lg:w-[200px] flex items-center justify-center rounded-xl px-4 sm:px-6 lg:px-8 shadow-sm border border-slate-100 flex-shrink-0">
+    <img
+      src={src}
+      alt={`Partner brand ${idx + 1}`}
+      className="max-h-10 sm:max-h-12 lg:max-h-14 w-full object-contain"
+      onError={(e) => { e.target.style.display = 'none'; }}
+    />
   </div>
 );
 
