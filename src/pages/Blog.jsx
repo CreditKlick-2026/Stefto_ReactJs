@@ -1,41 +1,37 @@
 import React, { useEffect } from 'react';
-import { BookOpen, Calendar, ArrowUpRight, TrendingUp, Search, User } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Calendar, User, Search, ArrowUpRight } from 'lucide-react';
 import blogBg from '../assets/insights_dropdown_bg.png';
 import rbiImg from '../assets/stefto_business_growth.png';
 import aiImg from '../assets/stefto_security_operations.png';
 import recoveryImg from '../assets/tech3.png';
-
 const Blog = () => {
+  const [blogPosts, setBlogPosts] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+
   useEffect(() => {
     window.scrollTo(0, 0);
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/api/v1/blog');
+        const data = await response.json();
+        if (data.success) {
+          setBlogPosts(data.data);
+        }
+      } catch (err) {
+        console.error("Failed to fetch blogs:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchPosts();
   }, []);
 
-  const blogPosts = [
-    {
-      title: "According to the RBI Report: The Indian Household Debt is Rising",
-      date: "Nov 01, 2024",
-      author: "Market Insights Team",
-      excerpt: "Analyzing the current state of Indian household debt in comparison with other emerging markets and what it means for the BFSI sector.",
-      image: rbiImg,
-      link: "/according-to-the-rbi-report-the-indian-household-debt-is-rising-but-it-is-relatively-low-in-comparison-with-other-emerging-markets"
-    },
-    {
-      title: "How AI is Making Debt Collection More Human: A 2025 Case Study",
-      date: "Oct 15, 2024",
-      author: "Technology Hub",
-      excerpt: "Beyond automation—how intelligent empathy and machine learning are creating better outcomes for distressed customers.",
-      image: aiImg,
-      link: "/how-ai-is-making-debt-collection-more-human-a-2025-case-study"
-    },
-    {
-      title: "The Significance of Recovery Management Solutions in Current Times",
-      date: "Sep 28, 2024",
-      author: "Operational Excellence",
-      excerpt: "Why robust recovery frameworks are more critical than ever for financial institutional stability and long-term customer relations.",
-      image: recoveryImg,
-      link: "/the-significance-of-recovery-management-solutions-in-current-times"
-    }
-  ];
+  // Simple placeholder for when images aren't present in DB
+  const getPlaceholderImage = (idx) => {
+    const images = [rbiImg, aiImg, recoveryImg];
+    return images[idx % images.length];
+  };
 
   return (
     <main className="w-full min-h-screen bg-slate-50">
@@ -80,36 +76,40 @@ const Blog = () => {
               <div key={idx} className="group flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl border border-slate-100 transition-all duration-500 hover:-translate-y-2">
                 <div className="relative h-64 overflow-hidden">
                    <div className="absolute inset-0 bg-stefto-navy/30 group-hover:bg-stefto-navy/0 transition-colors duration-500 z-10"></div>
-                   <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                   <img src={getPlaceholderImage(idx)} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                 </div>
                 
                 <div className="p-8 flex flex-col flex-grow">
                    <div className="flex items-center justify-between mb-6 text-xs font-bold uppercase tracking-widest text-slate-400">
                       <div className="flex items-center gap-2 text-stefto-indigo">
-                         <Calendar size={14} /> {post.date}
+                         <Calendar size={14} /> {new Date(post.published_at).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' })}
                       </div>
                       <div className="flex items-center gap-2">
-                         <User size={14} /> {post.author}
+                         <User size={14} /> Stefto Insights
                       </div>
                    </div>
-                   <h3 className="text-xl font-bold text-stefto-navy mb-4 group-hover:text-stefto-indigo transition-colors leading-tight">
+                   <h3 className="text-xl font-bold text-stefto-navy mb-4 group-hover:text-stefto-indigo transition-colors leading-tight line-clamp-2">
                      {post.title}
                    </h3>
-                   <p className="text-slate-500 text-sm mb-10 flex-grow leading-relaxed">
-                     {post.excerpt}
-                   </p>
-                   <a 
-                    href={post.link} 
-                    className="flex items-center justify-between group/btn py-4 border-t border-slate-50 hover:border-stefto-sky transition-all duration-300"
+                   <div className="text-slate-500 text-sm mb-10 flex-grow leading-relaxed line-clamp-3" dangerouslySetInnerHTML={{ __html: post.content.substring(0, 150) + '...' }}>
+                   </div>
+                   <Link 
+                    to={`/blog/${post.id}`} 
+                    className="flex items-center justify-between group/btn py-4 border-t border-slate-50 hover:border-stefto-sky transition-all duration-300 no-underline"
                    >
                      <span className="text-xs font-bold text-stefto-navy uppercase tracking-widest group-hover/btn:text-stefto-indigo transition-colors">Read Article</span>
                      <div className="w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center text-slate-400 group-hover/btn:bg-stefto-sky group-hover/btn:text-stefto-navy transition-all duration-300">
                         <ArrowUpRight size={18} />
                      </div>
-                   </a>
+                   </Link>
                 </div>
               </div>
             ))}
+            {blogPosts.length === 0 && !isLoading && (
+              <div className="col-span-full py-20 text-center">
+                <p className="text-slate-400 text-lg font-bold">No articles found in the database. Use the admin panel to publish some!</p>
+              </div>
+            )}
           </div>
 
           {/* Stay Updated Banner */}

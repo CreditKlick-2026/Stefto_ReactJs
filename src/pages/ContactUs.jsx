@@ -188,7 +188,7 @@ const ContactUs = () => {
                   </div>
                   <h3 className="font-bold text-[#1a237e] mb-2 text-lg">Noida Office</h3>
                   <p className="text-slate-500 text-sm leading-relaxed">
-                    C-125/A, c block, C Block, Sector 2, Noida, Uttar Pradesh 201301
+                    1st, 2nd and 3rd Floor B-24, Sector 1 Noida, Uttar Pradesh - 201301
                   </p>
                   {/* No Arrow here as it is the last item */}
                 </div>

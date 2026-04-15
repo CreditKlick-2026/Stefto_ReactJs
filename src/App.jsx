@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import AboutUs from './pages/AboutUs';
 import AccordingToTheRbiReportTheIndianHouseholdDebtIsRisingButItIsRelativelyLowInComparisonWithOtherEmergingMarkets from './pages/AccordingToTheRbiReportTheIndianHouseholdDebtIsRisingButItIsRelativelyLowInComparisonWithOtherEmergingMarkets';
@@ -39,8 +39,13 @@ import TermsOfUse from './pages/TermsOfUse';
 import TheSignificanceOfRecoveryManagementSolutionsInCurrentTimes from './pages/TheSignificanceOfRecoveryManagementSolutionsInCurrentTimes';
 import TravelHospitalityAndCargo from './pages/TravelHospitalityAndCargo';
 import Blog from './pages/Blog';
+import Admin from './pages/Admin';
+import AdminDashboard from './pages/AdminDashboard';
+import BlogPost from './pages/BlogPost';
+import BlogList from './pages/BlogList';
+import BlogDetail from './pages/BlogDetail';
 
-import { Phone, Mail, MapPin, ChevronDown, Search, Menu, X } from 'lucide-react';
+import { Phone, Mail, MapPin, ChevronDown, Search, Menu, X, LogIn, User, LayoutDashboard, LogOut } from 'lucide-react';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaYoutube } from 'react-icons/fa';
 
 import steftoLogo from './assets/Steftologo.png';
@@ -126,17 +131,37 @@ const NavBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const searchRef = useRef(null);
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
+  const location = useLocation();
+  const accountMenuRef = useRef(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem('stefto_admin_token');
+    setIsLoggedIn(!!token);
+  }, [location]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('stefto_admin_token');
+    setIsLoggedIn(false);
+    setIsAccountMenuOpen(false);
+    window.location.reload(); 
+  };
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
         setIsSearchVisible(false);
+      }
+      if (accountMenuRef.current && !accountMenuRef.current.contains(event.target)) {
+        setIsAccountMenuOpen(false);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [searchRef]);
+  }, [searchRef, accountMenuRef]);
 
   return (
     <header className="w-full sticky top-0 z-[1000] shadow-md">
@@ -164,7 +189,7 @@ const NavBar = () => {
           </div>
 
           {/* Desktop Nav - Hidden on mobile/tablet */}
-          <nav className="hidden lg:flex gap-3 xl:gap-4 items-center">
+          <nav className="hidden lg:flex absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 gap-3 xl:gap-4 items-center">
             {Object.keys(navMenus).map((label) => (
               <div
                 key={label}
@@ -212,6 +237,9 @@ const NavBar = () => {
                 )}
               </div>
             ))}
+            <Link to="/blogs" className="flex items-center gap-1.5 px-3 py-2 rounded-md cursor-pointer transition-all text-[17px] font-bold text-slate-900 hover:text-stefto-indigo no-underline">
+              Blog
+            </Link>
           </nav>
 
           {/* Right Actions */}
@@ -233,9 +261,40 @@ const NavBar = () => {
             )}
 
             {!isSearchVisible && (
-              <Link to="/contact-us" className="btn-spark hidden lg:inline-flex items-center justify-center relative overflow-hidden bg-stefto-indigo text-white py-2 px-6 rounded-full font-bold no-underline text-[13px] uppercase tracking-widest hover:bg-stefto-navy transition-all shadow-xl hover:shadow-2xl active:scale-95">
-                Contact us
-              </Link>
+              <>
+                <Link to="/contact-us" className="btn-spark hidden lg:inline-flex items-center justify-center relative overflow-hidden bg-stefto-indigo text-white py-2 px-6 rounded-full font-bold no-underline text-[13px] uppercase tracking-widest hover:bg-stefto-navy transition-all shadow-xl hover:shadow-2xl active:scale-95">
+                  Contact us
+                </Link>
+                {isLoggedIn ? (
+                  <div className="relative" ref={accountMenuRef}>
+                    <button 
+                      onClick={() => setIsAccountMenuOpen(!isAccountMenuOpen)}
+                      className="hidden lg:inline-flex items-center justify-center gap-2 border-2 border-stefto-indigo bg-white text-stefto-indigo py-2 px-5 rounded-full font-bold no-underline text-[13px] uppercase tracking-widest hover:bg-stefto-indigo hover:text-white transition-all active:scale-95 shadow-sm"
+                    >
+                      <User size={16} /> Account <ChevronDown size={14} className={`transition-transform duration-300 ${isAccountMenuOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    
+                    {isAccountMenuOpen && (
+                      <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-2xl border border-slate-100 py-2 z-[1001] animate-in fade-in slide-in-from-top-2 duration-200">
+                        <Link to="/admin-dashboard" onClick={() => setIsAccountMenuOpen(false)} className="flex items-center gap-3 px-4 py-3 text-slate-700 hover:bg-slate-50 no-underline transition-colors font-bold text-sm">
+                          <LayoutDashboard size={18} className="text-green-600" /> Dashboard
+                        </Link>
+                        <div className="h-px bg-slate-100 mx-2 my-1"></div>
+                        <button 
+                          onClick={handleLogout}
+                          className="w-full flex items-center gap-3 px-4 py-3 text-red-500 hover:bg-red-50/50 transition-colors font-bold text-sm bg-transparent border-none text-left cursor-pointer"
+                        >
+                          <LogOut size={18} /> Sign Out
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link to="/login" className="hidden lg:inline-flex items-center justify-center gap-1.5 border-2 border-stefto-indigo text-stefto-indigo py-2 px-5 rounded-full font-bold no-underline text-[13px] uppercase tracking-widest hover:bg-stefto-indigo hover:text-white transition-all active:scale-95">
+                    <LogIn size={15} /> Login
+                  </Link>
+                )}
+              </>
             )}
 
             {/* Hamburger - visible on mobile/tablet, hidden on desktop */}
@@ -261,7 +320,26 @@ const NavBar = () => {
                 </div>
               </div>
             ))}
-            <Link to="/contact-us" onClick={() => setIsMobileMenuOpen(false)} className="block bg-stefto-indigo text-white text-center py-2.5 sm:py-3 rounded-lg no-underline font-bold mt-3 text-sm">Contact us</Link>
+
+            <div className="mb-4 sm:mb-5">
+              <Link to="/blogs" onClick={() => setIsMobileMenuOpen(false)} className="text-stefto-indigo text-sm sm:text-base font-extrabold no-underline block border-b-2 border-slate-100 pb-1.5 hover:text-[#2b3366]">Blog</Link>
+            </div>
+
+            {isLoggedIn ? (
+              <div className="flex flex-col gap-2 mt-3">
+                <Link to="/admin-dashboard" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-center gap-2 bg-green-50 text-green-700 py-2.5 rounded-lg no-underline font-bold text-sm border border-green-200">
+                  <LayoutDashboard size={16} /> Dashboard
+                </Link>
+                <button onClick={handleLogout} className="flex items-center justify-center gap-2 bg-red-50 text-red-600 py-2.5 rounded-lg no-underline font-bold text-sm w-full border border-red-200 cursor-pointer">
+                  <LogOut size={16} /> Sign Out
+                </button>
+              </div>
+            ) : (
+              <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-center gap-2 border-2 border-stefto-indigo text-stefto-indigo text-center py-2.5 sm:py-3 rounded-lg no-underline font-bold mt-3 text-sm">
+                <LogIn size={16} /> Login
+              </Link>
+            )}
+            <Link to="/contact-us" onClick={() => setIsMobileMenuOpen(false)} className="block bg-stefto-indigo text-white text-center py-2.5 sm:py-3 rounded-lg no-underline font-bold mt-2 text-sm">Contact us</Link>
           </div>
         )}
       </div>
@@ -337,7 +415,7 @@ const Footer = () => (
           <div><strong>Head Office:</strong> Plot No. 112, Udyog Vihar, Phase-1, Gurugram, Haryana-122016</div>
           <div><strong>New Delhi Office:</strong> IInd Floor, DLF, Moti Nagar, New Delhi-110015</div>
           <div><strong>West Delhi Office:</strong> WZ-1, Upper Ground Floor, Main Nazafgarh Road, Uttam Nagar West, Delhi-110059</div>
-          <div><strong>Noida Office:</strong> Plot No. 125A, Block-C, Sec-2, Phase-1, Noida, Gautam Buddha Nagar, U.P.-201301</div>
+          <div><strong>Noida Office:</strong>1st, 2nd and 3rd Floor B-24, Sector 1 Noida, Uttar Pradesh - 201301</div>
           <div><strong>Pune Office:</strong> 501, 5th Floor, Pride Icon, Kharadi, Pune, Maharashtra-411014</div>
         </div>
 
@@ -368,14 +446,21 @@ const Footer = () => (
   </footer>
 );
 
-const App = () => {
+const AppContent = () => {
+  const location = useLocation();
+  // We hide the main navigation bar and footer on the backend CMS routes
+  const hideLayoutRoutes = ['/admin-dashboard'];
+  const showLayout = !hideLayoutRoutes.includes(location.pathname);
+
   return (
-    <Router>
-      <div className="bg-blobs">
-        <div className="blob-1"></div>
-        <div className="blob-2"></div>
-      </div>
-      <NavBar />
+    <>
+      {showLayout && (
+        <div className="bg-blobs">
+          <div className="blob-1"></div>
+          <div className="blob-2"></div>
+        </div>
+      )}
+      {showLayout && <NavBar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about-us" element={<AboutUs />} />
@@ -416,8 +501,21 @@ const App = () => {
         <Route path="/the-significance-of-recovery-management-solutions-in-current-times" element={<TheSignificanceOfRecoveryManagementSolutionsInCurrentTimes />} />
         <Route path="/travel-hospitality-and-cargo" element={<TravelHospitalityAndCargo />} />
         <Route path="/blogs" element={<Blog />} />
+        <Route path="/blog" element={<BlogList />} />
+        <Route path="/blog/:slug" element={<BlogDetail />} />
+        <Route path="/blog/:id" element={<BlogPost />} />
+        <Route path="/login" element={localStorage.getItem('stefto_admin_token') ? <Home /> : <Admin />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
       </Routes>
-      <Footer />
+      {showLayout && <Footer />}
+    </>
+  );
+};
+
+const App = () => {
+  return (
+    <Router>
+      <AppContent />
     </Router>
   );
 };
