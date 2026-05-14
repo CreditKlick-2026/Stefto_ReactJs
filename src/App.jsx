@@ -145,7 +145,7 @@ const NavBar = () => {
     localStorage.removeItem('stefto_admin_token');
     setIsLoggedIn(false);
     setIsAccountMenuOpen(false);
-    window.location.reload(); 
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -267,20 +267,20 @@ const NavBar = () => {
                 </Link>
                 {isLoggedIn ? (
                   <div className="relative" ref={accountMenuRef}>
-                    <button 
+                    <button
                       onClick={() => setIsAccountMenuOpen(!isAccountMenuOpen)}
                       className="hidden lg:inline-flex items-center justify-center gap-2 border-2 border-stefto-indigo bg-white text-stefto-indigo py-2 px-5 rounded-full font-bold no-underline text-[13px] uppercase tracking-widest hover:bg-stefto-indigo hover:text-white transition-all active:scale-95 shadow-sm"
                     >
                       <User size={16} /> Account <ChevronDown size={14} className={`transition-transform duration-300 ${isAccountMenuOpen ? 'rotate-180' : ''}`} />
                     </button>
-                    
+
                     {isAccountMenuOpen && (
                       <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-2xl border border-slate-100 py-2 z-[1001] animate-in fade-in slide-in-from-top-2 duration-200">
                         <Link to="/admin-dashboard" onClick={() => setIsAccountMenuOpen(false)} className="flex items-center gap-3 px-4 py-3 text-slate-700 hover:bg-slate-50 no-underline transition-colors font-bold text-sm">
                           <LayoutDashboard size={18} className="text-green-600" /> Dashboard
                         </Link>
                         <div className="h-px bg-slate-100 mx-2 my-1"></div>
-                        <button 
+                        <button
                           onClick={handleLogout}
                           className="w-full flex items-center gap-3 px-4 py-3 text-red-500 hover:bg-red-50/50 transition-colors font-bold text-sm bg-transparent border-none text-left cursor-pointer"
                         >
@@ -440,7 +440,7 @@ const Footer = () => (
     {/* Copyright Strip */}
     <div className="absolute bottom-0 left-0 w-full bg-white border-t border-stefto-navy/10 py-3 sm:py-4 px-4 sm:px-8 flex justify-center">
       <p className="text-slate-400 text-[0.65rem] sm:text-xs lg:text-sm m-0 text-center font-sans" style={{ color: '#64748b' }}>
-        <strong className="text-slate-500">Copyright &copy; 2007 &ndash; 2026</strong> Stefto Management Services (Incredible Management Services (India) Pvt Ltd)
+        <strong className="text-slate-500">Copyright &copy; 2007 &ndash; 2026</strong> Stefto (Incredible Management Services Pvt Ltd)
       </p>
     </div>
   </footer>
