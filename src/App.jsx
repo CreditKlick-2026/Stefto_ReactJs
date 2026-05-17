@@ -44,6 +44,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import BlogPost from './pages/BlogPost';
 import BlogList from './pages/BlogList';
 import BlogDetail from './pages/BlogDetail';
+import Maintenance from './pages/Maintenance';
 
 import { Phone, Mail, MapPin, ChevronDown, Search, Menu, X, LogIn, User, LayoutDashboard, LogOut } from 'lucide-react';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaYoutube } from 'react-icons/fa';
@@ -447,67 +448,15 @@ const Footer = () => (
 );
 
 const AppContent = () => {
-  const location = useLocation();
-  // We hide the main navigation bar and footer on the backend CMS routes
-  const hideLayoutRoutes = ['/admin-dashboard'];
-  const showLayout = !hideLayoutRoutes.includes(location.pathname);
-
   return (
     <>
-      {showLayout && (
-        <div className="bg-blobs">
-          <div className="blob-1"></div>
-          <div className="blob-2"></div>
-        </div>
-      )}
-      {showLayout && <NavBar />}
+      <div className="bg-blobs">
+        <div className="blob-1"></div>
+        <div className="blob-2"></div>
+      </div>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about-us" element={<AboutUs />} />
-        <Route path="/according-to-the-rbi-report-the-indian-household-debt-is-rising-but-it-is-relatively-low-in-comparison-with-other-emerging-markets" element={<AccordingToTheRbiReportTheIndianHouseholdDebtIsRisingButItIsRelativelyLowInComparisonWithOtherEmergingMarkets />} />
-        <Route path="/automotive" element={<Automotive />} />
-        <Route path="/back-office-support" element={<BackOfficeSupport />} />
-        <Route path="/banking-and-financial-services" element={<BankingAndFinancialServices />} />
-        <Route path="/careers" element={<Careers />} />
-        <Route path="/case-studies" element={<CaseStudies />} />
-        <Route path="/contact-us" element={<ContactUs />} />
-        <Route path="/cookie-policy" element={<CookiePolicy />} />
-        <Route path="/credit-refine" element={<CreditRefine />} />
-        <Route path="/customer-stories" element={<CustomerStories />} />
-        <Route path="/customer-support" element={<CustomerSupport />} />
-        <Route path="/debt-collection" element={<DebtCollection />} />
-        <Route path="/digital-debt-management" element={<DigitalDebtManagement />} />
-        <Route path="/digital-lead-partner" element={<DigitalLeadPartner />} />
-        <Route path="/health-care" element={<HealthCare />} />
-        <Route path="/how-ai-is-making-debt-collection-more-human-a-2025-case-study" element={<HowAiIsMakingDebtCollectionMoreHumanA2025CaseStudy />} />
-        <Route path="/inbound" element={<Inbound />} />
-        <Route path="/insurance" element={<Insurance />} />
-        <Route path="/leadership" element={<Leadership />} />
-        <Route path="/legal-statement" element={<LegalStatement />} />
-        <Route path="/new-update" element={<NewUpdate />} />
-        <Route path="/news" element={<News />} />
-        <Route path="/outbound" element={<Outbound />} />
-        <Route path="/press-release" element={<PressRelease />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/refunds-cancellations" element={<RefundsCancellations />} />
-        <Route path="/retail-and-e-commerce" element={<RetailAndECommerce />} />
-        <Route path="/retention-and-persistency" element={<RetentionAndPersistency />} />
-        <Route path="/sales-support" element={<SalesSupport />} />
-        <Route path="/security" element={<Security />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/technology" element={<Technology />} />
-        <Route path="/telecom" element={<Telecom />} />
-        <Route path="/terms-of-use" element={<TermsOfUse />} />
-        <Route path="/the-significance-of-recovery-management-solutions-in-current-times" element={<TheSignificanceOfRecoveryManagementSolutionsInCurrentTimes />} />
-        <Route path="/travel-hospitality-and-cargo" element={<TravelHospitalityAndCargo />} />
-        <Route path="/blogs" element={<Blog />} />
-        <Route path="/blog" element={<BlogList />} />
-        <Route path="/blog/:slug" element={<BlogDetail />} />
-        <Route path="/blog/:id" element={<BlogPost />} />
-        <Route path="/login" element={localStorage.getItem('stefto_admin_token') ? <Home /> : <Admin />} />
-        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="*" element={<Maintenance />} />
       </Routes>
-      {showLayout && <Footer />}
     </>
   );
 };
